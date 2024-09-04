@@ -1,7 +1,13 @@
+import Header from "@/components/Header/Header";
+import TaskList from "@/components/TaskList/TaskList";
+
 export default function HomePage() {
   return (
-    <div>
-      <h1>Shopping buddy!</h1>
-    </div>
+    <>
+      <Header />
+      <main>
+        <TaskList />
+      </main>
+    </>
   );
 }
