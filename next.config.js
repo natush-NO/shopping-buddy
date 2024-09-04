@@ -13,6 +13,14 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: [
+      "example.com",
+      "anotherdomain.com",
+      "media.istockphoto.com",
+      "images.unsplash.com",
+    ], // Додано новий домен
+  },
 };
 
 module.exports = nextConfig;

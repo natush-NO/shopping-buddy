@@ -10,6 +10,11 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   z-index: 999;
+
+  @media (max-width: 500px) {
+    min-height: 100px;
+    padding: 20px 0;
+  }
 `;
 
 const StyledTitleHeader = styled.h1`

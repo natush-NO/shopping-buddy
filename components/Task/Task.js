@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 import categoryColor from "@/utils/categoryColor";
 
 const StyledItem = styled.li`
@@ -27,11 +28,10 @@ const StyledImageWrapper = styled.div`
   height: 150px;
   overflow: hidden;
   border-radius: 5px;
+  position: relative;
 `;
 
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
+const StyledImage = styled(Image)`
   object-fit: cover;
 `;
 
@@ -55,7 +55,7 @@ export default function Task({ item }) {
     <StyledItem>
       <StyledImageWrapper>
         {item.imageUrl ? (
-          <StyledImage src={item.imageUrl} alt={item.name} />
+          <StyledImage src={item.imageUrl} alt={item.name} fill sizes="150px" />
         ) : (
           <p>No image available</p>
         )}
