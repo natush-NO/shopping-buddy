@@ -1,3 +1,5 @@
+//./utils/categoryColor.js
+
 export default function categoryColor(category) {
   if (category === "Dairy") {
     return "#b5a29a";

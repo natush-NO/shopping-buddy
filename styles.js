@@ -41,18 +41,61 @@ body {
   line-height: 1;
   height: 100%;
   font-family: system-ui;
-  margin: 180px 0 0 0;
+  margin: 250px 0 0 0;
   background-image: url('/images/background_image.webp');
+  color: #4a4a4a;
 }
 
 body::after {
   content: ""; 
-  position: absolute; 
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2); 
+  background: rgba(255, 255, 255, 0.1); 
   z-index: -1; 
 }
+
+/* FORM */
+input,
+button,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+input,
+textarea {
+  width: 100%;
+}
+
+label {
+  display: inline-block;
+}
+
+button,
+select,
+option {
+  cursor: pointer;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  appearance: none;
+}
+
+input[type="number"] {
+  appearance: textfield; 
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: auto; 
+  }
+
+  &::-moz-appearance {
+    appearance: auto; 
+  }
 `;
