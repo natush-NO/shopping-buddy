@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledHeader = styled.header`
   width: 100%;
-  min-height: 150px;
+  min-height: 155px;
   padding: 50px 0;
   background: url("/images/background_image.webp");
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
