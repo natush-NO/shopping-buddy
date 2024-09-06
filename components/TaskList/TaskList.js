@@ -6,12 +6,12 @@ import {
   StyledItems,
 } from "./StyledTaskList";
 
-export default function TaskList({ currentTasks }) {
+export default function TaskList({ list }) {
   return (
     <StyledContainerList>
       <StyledTitleItems>Shopping List</StyledTitleItems>
       <StyledItems>
-        {currentTasks.map((item) => (
+        {list.map((item) => (
           <Task key={item.id} item={item} />
         ))}
       </StyledItems>

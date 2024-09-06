@@ -40,7 +40,6 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
     }
 
     const newItem = {
-      id: Date.now().toString(),
       name,
       quantity: parseInt(quantity, 10),
       category,

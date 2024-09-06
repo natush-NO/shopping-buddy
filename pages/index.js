@@ -3,8 +3,7 @@ import TaskList from "@/components/TaskList/TaskList";
 import ShoppingItemForm from "@/components/ShoppingItemForm/ShoppingItemForm";
 
 export default function HomePage({
-  currentTasks,
-  onCreateTask,
+  sortedTasks,
   handleAddItem,
   showForm,
   setShowForm,
@@ -13,12 +12,7 @@ export default function HomePage({
     <>
       <Header showForm={showForm} setShowForm={setShowForm} />
       <main>
-        <TaskList
-          currentTasks={currentTasks}
-          onCreateTask={onCreateTask}
-          showForm={showForm}
-          setShowForm={setShowForm}
-        />
+        <TaskList list={sortedTasks} />
         {showForm && (
           <ShoppingItemForm
             onAddItem={handleAddItem}

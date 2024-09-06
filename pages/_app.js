@@ -6,27 +6,21 @@ import sortShoppingListByCategory from "@/utils/sortShoppingListByCategory";
 
 export default function App({ Component, pageProps }) {
   const [showForm, setShowForm] = useState(false);
-  const [currentTasks, setCurrentTasks] = useState(initialShoppingList);
-
-  function onCreateTask(taskData) {
-    const newTaskObject = { ...taskData, id: uid() };
-    console.log("New task:", newTaskObject);
-    setCurrentTasks((prevTasks) => [newTaskObject, ...prevTasks]);
-  }
+  const [shoppingItems, setShoppingItems] = useState(initialShoppingList);
 
   const handleAddItem = (newItem) => {
-    setCurrentTasks([newItem, ...currentTasks]);
+    const newTaskObject = { ...newItem, id: uid() };
+    setShoppingItems([newTaskObject, ...shoppingItems]);
   };
 
-  const sortedTasks = sortShoppingListByCategory(currentTasks);
+  const sortedTasks = sortShoppingListByCategory(shoppingItems);
 
   return (
     <>
       <GlobalStyle />
       <Component
         {...pageProps}
-        currentTasks={sortedTasks}
-        onCreateTask={onCreateTask}
+        sortedTasks={sortedTasks}
         handleAddItem={handleAddItem}
         showForm={showForm}
         setShowForm={setShowForm}
