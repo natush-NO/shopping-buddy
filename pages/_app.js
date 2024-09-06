@@ -3,7 +3,6 @@ import { useState } from "react";
 import { initialShoppingList } from "@/lib/data";
 import { uid } from "uid";
 import sortShoppingListByCategory from "@/utils/sortShoppingListByCategory";
-// import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const [showForm, setShowForm] = useState(false);
@@ -13,19 +12,6 @@ export default function App({ Component, pageProps }) {
     const newTaskObject = { ...newItem, id: uid() };
     setShoppingItems([newTaskObject, ...shoppingItems]);
   };
-
-  // function handleConfirm(event, id) {
-  //   event.preventDefault();
-  //   setCurrentTasks(currentTasks.filter((task) => task.id !== id));
-  //   router.push("/");
-  // }
-
-  // function toggleIsCompleted(id) {
-  //   const task = currentTasks.find((task) => task.id === id);
-  //   if (task) {
-  //     setCurrentTasks(currentTasks.filter((task) => task.id !== id));
-  //   }
-  // }
 
   const sortedTasks = sortShoppingListByCategory(shoppingItems);
 
@@ -38,8 +24,6 @@ export default function App({ Component, pageProps }) {
         handleAddItem={handleAddItem}
         showForm={showForm}
         setShowForm={setShowForm}
-        // handleConfirm={handleConfirm}
-        // toggleIsCompleted={toggleIsCompleted}
       />
     </>
   );

@@ -1,5 +1,3 @@
-//./components/Task/Task.js
-// import Image from "next/image";
 import categoryColor from "@/utils/categoryColor";
 import {
   StyledItem,
@@ -8,12 +6,6 @@ import {
   StyledTaskTitle,
   CategoryText,
 } from "./StyledTask";
-
-// export const StyledImage = styled(Image)`
-//   object-fit: cover;
-//   width: 100%;
-//   height: 100%;
-// `;
 
 const placeholder = "/images/placeholder_image.webp";
 

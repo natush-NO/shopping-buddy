@@ -15,10 +15,6 @@ export const StyledFormContainer = styled.div`
 
   z-index: 1000;
   overflow: auto;
-<<<<<<< HEAD
-  // box-sizing: border-box;
-=======
->>>>>>> 706f125f0eb55492f576daf8a66ce5f5460bfb89
 `;
 
 export const StyledFormTitle = styled.h2`

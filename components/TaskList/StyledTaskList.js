@@ -14,30 +14,6 @@ export const StyledTitleItems = styled.h2`
   margin-bottom: 70px;
 `;
 
-// export const ToggleButton = styled.button`
-//   padding: 15px 45px;
-//   font-size: 18px;
-//   color: #fff;
-//   background: #3d3d3d;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-//   margin: 0 auto 20px;
-//   display: ${({ $showForm }) => ($showForm ? "none" : "block")};
-//   transition: all 0.2s;
-//   margin-bottom: 30px;
-
-//   &:hover {
-//     background-color: #555555;
-//     transition: all 0.4s;
-//   }
-
-//   &:focus {
-//     outline: none;
-//     border: 1px solid #3d3d3d;
-//   }
-// `;
-
 export const StyledItems = styled.ul`
   font-size: 18px;
   font-weight: 600;
