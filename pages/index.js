@@ -1,20 +1,30 @@
-import { useState } from "react";
 import Header from "@/components/Header/Header";
 import TaskList from "@/components/TaskList/TaskList";
-import { initialShoppingList } from "@/lib/data";
+import ShoppingItemForm from "@/components/ShoppingItemForm/ShoppingItemForm";
 
-export default function HomePage() {
-  const [items, setItems] = useState(initialShoppingList);
-
-  const handleAddItem = (newItem) => {
-    setItems([newItem, ...items]);
-  };
-
+export default function HomePage({
+  currentTasks,
+  onCreateTask,
+  handleAddItem,
+  showForm,
+  setShowForm,
+}) {
   return (
     <>
-      <Header />
+      <Header showForm={showForm} setShowForm={setShowForm} />
       <main>
-        <TaskList items={items} onAddItem={handleAddItem} />
+        <TaskList
+          currentTasks={currentTasks}
+          onCreateTask={onCreateTask}
+          showForm={showForm}
+          setShowForm={setShowForm}
+        />
+        {showForm && (
+          <ShoppingItemForm
+            onAddItem={handleAddItem}
+            setShowForm={setShowForm}
+          />
+        )}
       </main>
     </>
   );
