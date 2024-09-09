@@ -14,7 +14,7 @@ import {
 
 const errorMessages = {
   name: "Name is required",
-  quantity: "Quantity must be a number greater than 1",
+  quantity: "Quantity must be a number greater than 0",
   category: "Please select a category",
 };
 
@@ -85,11 +85,13 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
             type="number"
             id="quantity"
             value={quantity}
-            min="1"
+            min="0"
             onChange={(event) => setQuantity(event.target.value)}
           />
           {errors.quantity && (
-            <StyledErrorMessage>{errors.quantity}</StyledErrorMessage>
+            <StyledErrorMessage $labelQuantity>
+              {errors.quantity}
+            </StyledErrorMessage>
           )}
         </StyledInputField>
 
