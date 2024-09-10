@@ -41,7 +41,7 @@ body {
   line-height: 1;
   height: 100%;
   font-family: system-ui;
-  margin: 250px 0 0 0;
+  margin: 330px 0 0 0;
   background-image: url('/images/background_image.webp');
   color: #4a4a4a;
 }
