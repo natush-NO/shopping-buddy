@@ -7,6 +7,7 @@ export default function HomePage({
   handleAddItem,
   showForm,
   setShowForm,
+  placeholder,
 }) {
   return (
     <>
@@ -17,6 +18,7 @@ export default function HomePage({
           <ShoppingItemForm
             onAddItem={handleAddItem}
             setShowForm={setShowForm}
+            placeholder={placeholder}
           />
         )}
       </main>

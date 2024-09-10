@@ -110,29 +110,16 @@ export const StyledTextarea = styled.textarea`
 
 export const StyledButton = styled.button`
   padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background: #3d3d3d;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   margin-left: ${(props) => (props.$cancel ? "10px" : "2px")};
-  transition: all 0.2s;
 
   &:hover {
     background-color: ${(props) => (props.$cancel ? "#ff4d4d" : "#555555")};
-    transition: all 0.4s;
-  }
-
-  &:focus {
-    border: 1px solid #3d3d3d;
-    outline: none;
   }
 `;
 
 export const StyledErrorMessage = styled.p`
   color: #b71c1c;
   font-size: 14px;
-  margin-left: 3px;
+  margin-left: ${(props) => (props.$labelQuantity ? "70%" : "3")};
   margin-top: 2px;
 `;

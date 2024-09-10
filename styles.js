@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
 *,
 *::before,
 *::after {
@@ -41,7 +42,7 @@ body {
   line-height: 1;
   height: 100%;
   font-family: system-ui;
-  margin: 330px 0 0 0;
+  margin: 330px 0 100px 0;
   background-image: url('/images/background_image.webp');
   color: #4a4a4a;
 }
@@ -75,6 +76,29 @@ textarea {
 label {
   display: inline-block;
 }
+
+button {
+  background-color: #3d3d3d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+
+}
+
+  button:hover {
+  background-color: #555555;
+    transition: all 0.4s;
+  }
+
+  button:focus {
+    border: 1px solid #3d3d3d;
+    outline: none;
+  }
+
+
 
 button,
 select,

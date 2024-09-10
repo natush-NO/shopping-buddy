@@ -14,16 +14,18 @@ export default function App({ Component, pageProps }) {
   };
 
   const sortedTasks = sortShoppingListByCategory(shoppingItems);
+  const placeholder = "/images/placeholder_image.webp";
 
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle marginSize="0  0 100px 0" />
       <Component
         {...pageProps}
         sortedTasks={sortedTasks}
         handleAddItem={handleAddItem}
         showForm={showForm}
         setShowForm={setShowForm}
+        placeholder={placeholder}
       />
     </>
   );
