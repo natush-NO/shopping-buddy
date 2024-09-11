@@ -1,5 +1,5 @@
 import Header from "@/components/Header/Header";
-import TaskList from "@/components/TaskList/TaskList";
+import ItemList from "@/components/ItemsList/ItemList";
 import ShoppingItemForm from "@/components/ShoppingItemForm/ShoppingItemForm";
 
 export default function HomePage({
@@ -8,12 +8,27 @@ export default function HomePage({
   showForm,
   setShowForm,
   placeholder,
+  handleDelete,
+  selectedItemId,
+  openModal,
+  closeModal,
+  isListEmpty,
+  handleCancel,
 }) {
   return (
     <>
       <Header showForm={showForm} setShowForm={setShowForm} />
       <main>
-        <TaskList list={sortedTasks} />
+        <ItemList
+          list={sortedTasks}
+          handleDelete={handleDelete}
+          openModal={openModal}
+          closeModal={closeModal}
+          selectedItemId={selectedItemId}
+          isListEmpty={isListEmpty}
+          setShowForm={setShowForm}
+          handleCancel={handleCancel}
+        />
         {showForm && (
           <ShoppingItemForm
             onAddItem={handleAddItem}

@@ -42,3 +42,18 @@ export const StyledItems = styled.ul`
     grid-template-rows: repeat(auto-fill, 500px);
   }
 `;
+
+export const StyledEmptyMessage = styled.div`
+  text-align: center;
+`;
+
+export const StyledEmptyMessageText = styled.p`
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 35px;
+`;
+
+export const StyledEmptyMessageButton = styled.button`
+  font-size: 32px;
+  padding: 15px 20px;
+`;

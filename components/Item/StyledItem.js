@@ -16,7 +16,7 @@ export const StyledItem = styled.li`
   }
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledItemLink = styled(Link)`
   cursor: pointer;
   width: 100%;
   height: 100%;
@@ -39,7 +39,7 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-export const StyledImageWrapper = styled.div`
+export const StyledItemImageWrapper = styled.div`
   width: 150px;
   height: 150px;
   overflow: hidden;
@@ -52,19 +52,23 @@ export const StyledImageWrapper = styled.div`
   }
 `;
 
-export const StyledImage = styled(Image)`
+export const StyledItemImage = styled(Image)`
   object-fit: cover;
   width: 100%;
   height: 100%;
 `;
 
-export const StyledTaskTitle = styled.h2`
+export const StyledItemTitle = styled.h2`
   font-size: 32px;
 `;
 
-export const CategoryText = styled.p`
+export const StyledItemCategoryText = styled.p`
   background-color: ${(props) => props.$backgroundColor};
   font-size: 26px;
   padding: 15px 25px;
   border-radius: 5px;
+`;
+
+export const StyledItemButtonDelete = styled.button`
+  padding: 15px 20px;
 `;
