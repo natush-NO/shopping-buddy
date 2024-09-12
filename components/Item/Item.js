@@ -2,6 +2,9 @@ import categoryColor from "@/utils/categoryColor";
 import {
   StyledItem,
   StyledItemLink,
+  StyledrStatusWrrepe,
+  StyledrStatusText,
+  StyledTogglePurchasedStatus,
   StyledItemImageWrapper,
   StyledItemImage,
   StyledItemTitle,
@@ -18,18 +21,25 @@ export default function Item({
   openModal,
   closeModal,
   onClose,
+  togglePurchasedStatus,
+  isPurchasedView,
 }) {
   const colorCategory = categoryColor(item.category);
 
-  const handleLinkClick = (event) => {
-    if (isOpen) {
+  const handleClick = (event) => {
+    if (isOpen || isPurchasedView) {
       event.preventDefault();
     }
   };
 
+  const handleTogglePurchaseStatus = (event) => {
+    event.preventDefault();
+    togglePurchasedStatus(item.id);
+  };
+
   return (
-    <StyledItem>
-      <StyledItemLink href={`/items/${item.id}`} onClick={handleLinkClick}>
+    <StyledItem $isPurchasedView={isPurchasedView}>
+      <StyledItemLink href={`/items/${item.id}`} onClick={handleClick}>
         <StyledItemImageWrapper>
           <StyledItemImage
             src={item.imageUrl || placeholder}
@@ -69,6 +79,18 @@ export default function Item({
             <p>Are you sure you want to delete this item?</p>
           </ModalDelete>
         )}
+
+        <StyledrStatusWrrepe>
+          <StyledrStatusText>
+            {isPurchasedView
+              ? "Move the item to the purchased list."
+              : "Move the item back to the shopping list."}
+          </StyledrStatusText>
+          <StyledTogglePurchasedStatus
+            onClick={handleTogglePurchaseStatus}
+            $isPurchasedView={isPurchasedView}
+          />
+        </StyledrStatusWrrepe>
       </StyledItemLink>
     </StyledItem>
   );

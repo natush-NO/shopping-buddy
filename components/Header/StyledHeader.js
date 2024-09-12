@@ -32,6 +32,10 @@ export const StyledTitleHeader = styled.h1`
   letter-spacing: 10px;
 
   @media (min-width: 391px) {
+    font-size: ${({ $fontSize }) => $fontSize || "54px"};
+  }
+
+  @media (min-width: 750px) {
     font-size: ${({ $fontSize }) => $fontSize || "64px"};
   }
 `;

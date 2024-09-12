@@ -5,10 +5,10 @@ export const StyledContainerList = styled.div`
   max-width: 2000px;
   padding: 0 15px;
   margin: 0 auto;
-  margin-top: -120px;
+  margin-top: ${(props) => (props.$isPurchasedView ? "100px" : "-120px")};
 
   @media (min-width: 391px) {
-    margin-top: -70px;
+    margin-top: ${(props) => (props.$isPurchasedView ? "100px" : "-70px")};
   }
 
   @media (min-width: 661px) {
@@ -16,7 +16,7 @@ export const StyledContainerList = styled.div`
   }
 
   @media (min-width: 1000px) {
-    margin-top: -70px;
+    margin-top: ${(props) => (props.$isPurchasedView ? "60px" : "130px")};
   }
 `;
 
@@ -39,7 +39,7 @@ export const StyledItems = styled.ul`
 
   @media (min-width: 391px) {
     grid-template-columns: repeat(auto-fill, 400px);
-    grid-template-rows: repeat(auto-fill, 500px);
+    grid-template-rows: repeat(auto-fill, 600px);
   }
 `;
 

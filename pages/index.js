@@ -1,9 +1,9 @@
 import Header from "@/components/Header/Header";
-import ItemList from "@/components/ItemsList/ItemList";
+import ItemsList from "@/components/ItemsList/ItemsList";
 import ShoppingItemForm from "@/components/ShoppingItemForm/ShoppingItemForm";
 
 export default function HomePage({
-  sortedTasks,
+  sortedItem,
   handleAddItem,
   showForm,
   setShowForm,
@@ -14,6 +14,8 @@ export default function HomePage({
   closeModal,
   isListEmpty,
   handleCancel,
+  completedPurchases,
+  togglePurchasedStatus,
 }) {
   return (
     <>
@@ -23,8 +25,8 @@ export default function HomePage({
         isListEmpty={isListEmpty}
       />
       <main>
-        <ItemList
-          list={sortedTasks}
+        <ItemsList
+          list={sortedItem}
           handleDelete={handleDelete}
           openModal={openModal}
           closeModal={closeModal}
@@ -32,6 +34,16 @@ export default function HomePage({
           isListEmpty={isListEmpty}
           setShowForm={setShowForm}
           handleCancel={handleCancel}
+          togglePurchasedStatus={togglePurchasedStatus}
+          isPurchasedView={false}
+        />
+        <ItemsList
+          list={completedPurchases}
+          handleDelete={handleDelete}
+          openModal={openModal}
+          closeModal={closeModal}
+          togglePurchasedStatus={togglePurchasedStatus}
+          isPurchasedView={true}
         />
         {showForm && (
           <ShoppingItemForm

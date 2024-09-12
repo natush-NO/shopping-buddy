@@ -13,7 +13,7 @@ import {
 import Header from "@/components/Header/Header";
 import ModalImageDetails from "@/components/ShoppingItemDetails/ModalShoppingItemDetails/ModalShoppingItemDetails";
 
-export default function ShoppingItemDetails({ sortedTasks, placeholder }) {
+export default function ShoppingItemDetails({ sortedItem, placeholder }) {
   const router = useRouter();
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useLocalStorageState("is-modal-open", {
@@ -28,7 +28,7 @@ export default function ShoppingItemDetails({ sortedTasks, placeholder }) {
     { defaultValue: "" }
   );
 
-  const item = sortedTasks.find((item) => item.id === id);
+  const item = sortedItem.find((item) => item.id === id);
 
   const handleImageClick = () => {
     setModalImageSrc(item.imageUrl);

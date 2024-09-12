@@ -24,6 +24,13 @@ export default function App({ Component, pageProps }) {
     }
   );
 
+  const [completedPurchases, setCompletedPurchases] = useLocalStorageState(
+    "completedPurchases",
+    {
+      defaultValue: [],
+    }
+  );
+
   const handleAddItem = (newItem) => {
     const newTaskObject = { ...newItem, id: uid() };
     setShoppingItems([newTaskObject, ...shoppingItems]);
@@ -49,7 +56,39 @@ export default function App({ Component, pageProps }) {
     setSelectedItemId(null);
   }
 
-  const sortedTasks = sortShoppingListByCategory(shoppingItems);
+  function togglePurchasedStatus(id) {
+    const itemToToggle = shoppingItems.find((item) => item.id === id);
+
+    if (itemToToggle) {
+      if (!itemToToggle.initialIndex && itemToToggle.initialIndex !== 0) {
+        const itemIndex = shoppingItems.findIndex((item) => item.id === id);
+        itemToToggle.initialIndex = itemIndex;
+      }
+
+      const filteredShoppingItems = shoppingItems.filter(
+        (item) => item.id !== id
+      );
+      setShoppingItems(filteredShoppingItems);
+      setCompletedPurchases([itemToToggle, ...completedPurchases]);
+    } else {
+      const itemToMoveBack = completedPurchases.find((item) => item.id === id);
+      const filteredCompletedPurchases = completedPurchases.filter(
+        (item) => item.id !== id
+      );
+      setCompletedPurchases(filteredCompletedPurchases);
+
+      const updatedShoppingItems = [...shoppingItems];
+      updatedShoppingItems.splice(
+        itemToMoveBack.initialIndex,
+        0,
+        itemToMoveBack
+      );
+
+      setShoppingItems(updatedShoppingItems);
+    }
+  }
+
+  const sortedItem = sortShoppingListByCategory(shoppingItems);
   const placeholder = "/images/placeholder_image.webp";
   const isListEmpty = shoppingItems.length === 0;
 
@@ -58,7 +97,7 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle marginSize="0  0 100px 0" />
       <Component
         {...pageProps}
-        sortedTasks={sortedTasks}
+        sortedItem={sortedItem}
         handleAddItem={handleAddItem}
         showForm={showForm}
         setShowForm={setShowForm}
@@ -69,6 +108,9 @@ export default function App({ Component, pageProps }) {
         closeModal={closeModal}
         isListEmpty={isListEmpty}
         handleCancel={handleCancel}
+        completedPurchases={completedPurchases}
+        isPurchasedView={false}
+        togglePurchasedStatus={togglePurchasedStatus}
       />
     </>
   );

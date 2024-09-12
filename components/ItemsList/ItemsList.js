@@ -9,7 +9,7 @@ import {
   StyledEmptyMessageButton,
 } from "./StyledItemsList";
 
-export default function ItemList({
+export default function ItemsList({
   list,
   handleDelete,
   openModal,
@@ -18,11 +18,30 @@ export default function ItemList({
   isListEmpty,
   setShowForm,
   handleCancel,
+  togglePurchasedStatus,
+  isPurchasedView = false,
 }) {
+  const itemCount = list.length;
+
+  const allItemsPurchased = list.every((item) => item.isPurchased);
+
   return (
-    <StyledContainerList>
-      <StyledTitleItems>Shopping List</StyledTitleItems>
-      {isListEmpty ? (
+    <StyledContainerList $isPurchasedView={isPurchasedView}>
+      <StyledTitleItems>
+        {isPurchasedView
+          ? `Purchased goods (${itemCount})`
+          : `Shopping List (${itemCount})`}
+      </StyledTitleItems>
+      {isPurchasedView && allItemsPurchased ? (
+        <StyledEmptyMessage>
+          <StyledEmptyMessageText>
+            All purchases have been completed.
+          </StyledEmptyMessageText>
+          <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
+            Add new items
+          </StyledEmptyMessageButton>
+        </StyledEmptyMessage>
+      ) : isListEmpty ? (
         <StyledEmptyMessage>
           <StyledEmptyMessageText>
             No items in the shopping list.
@@ -42,6 +61,8 @@ export default function ItemList({
               closeModal={closeModal}
               isOpen={selectedItemId === item.id}
               onClose={handleCancel}
+              togglePurchasedStatus={togglePurchasedStatus}
+              isPurchasedView={isPurchasedView}
             />
           ))}
         </StyledItems>
