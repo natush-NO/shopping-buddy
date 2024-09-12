@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import categories from "@/utils/categories.json";
 import {
   StyledFormContainer,
@@ -19,11 +19,21 @@ const errorMessages = {
 };
 
 export default function ShoppingItemForm({ onAddItem, setShowForm }) {
-  const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState("1");
-  const [category, setCategory] = useState("");
-  const [comment, setComment] = useState("");
-  const [errors, setErrors] = useState({});
+  const [name, setName] = useLocalStorageState("form-name", {
+    defaultValue: "",
+  });
+  const [quantity, setQuantity] = useLocalStorageState("form-quantity", {
+    defaultValue: "1",
+  });
+  const [category, setCategory] = useLocalStorageState("form-category", {
+    defaultValue: "",
+  });
+  const [comment, setComment] = useLocalStorageState("form-comment", {
+    defaultValue: "",
+  });
+  const [errors, setErrors] = useLocalStorageState("form-errors", {
+    defaultValue: {},
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,6 +66,12 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
   };
 
   const handleCancel = () => {
+    setName("");
+    setQuantity("1");
+    setCategory("");
+    setComment("");
+    setErrors({});
+
     if (setShowForm) setShowForm(false);
   };
 

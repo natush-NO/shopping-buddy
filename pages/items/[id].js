@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { useRouter } from "next/router";
 import {
   StyledContainer,
@@ -16,9 +16,17 @@ import ModalImageDetails from "@/components/ShoppingItemDetails/ModalShoppingIte
 export default function ShoppingItemDetails({ sortedTasks, placeholder }) {
   const router = useRouter();
   const { id } = router.query;
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImageSrc, setModalImageSrc] = useState("");
-  const [modalItemName, setModalItemName] = useState("");
+  const [isModalOpen, setIsModalOpen] = useLocalStorageState("is-modal-open", {
+    defaultValue: false,
+  });
+  const [modalImageSrc, setModalImageSrc] = useLocalStorageState(
+    "modal-image-src",
+    { defaultValue: "" }
+  );
+  const [modalItemName, setModalItemName] = useLocalStorageState(
+    "modal-item-name",
+    { defaultValue: "" }
+  );
 
   const item = sortedTasks.find((item) => item.id === id);
 

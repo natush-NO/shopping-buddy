@@ -1,14 +1,28 @@
 import GlobalStyle from "../styles";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
+import { useRouter } from "next/router";
 import { initialShoppingList } from "@/lib/data";
 import { uid } from "uid";
 import sortShoppingListByCategory from "@/utils/sortShoppingListByCategory";
-import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
-  const [showForm, setShowForm] = useState(false);
-  const [shoppingItems, setShoppingItems] = useState(initialShoppingList);
-  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [shoppingItems, setShoppingItems] = useLocalStorageState(
+    "shopping-items",
+    {
+      defaultValue: initialShoppingList,
+    }
+  );
+
+  const [showForm, setShowForm] = useLocalStorageState("show-form", {
+    defaultValue: false,
+  });
+
+  const [selectedItemId, setSelectedItemId] = useLocalStorageState(
+    "selected-item-id",
+    {
+      defaultValue: null,
+    }
+  );
 
   const handleAddItem = (newItem) => {
     const newTaskObject = { ...newItem, id: uid() };

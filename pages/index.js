@@ -17,7 +17,11 @@ export default function HomePage({
 }) {
   return (
     <>
-      <Header showForm={showForm} setShowForm={setShowForm} />
+      <Header
+        showForm={showForm}
+        setShowForm={setShowForm}
+        isListEmpty={isListEmpty}
+      />
       <main>
         <ItemList
           list={sortedTasks}
