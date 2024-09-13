@@ -2,14 +2,14 @@ import categoryColor from "@/utils/categoryColor";
 import {
   StyledItem,
   StyledItemLink,
-  StyledrStatusWrrepe,
-  StyledrStatusText,
-  StyledTogglePurchasedStatus,
   StyledItemImageWrapper,
   StyledItemImage,
   StyledItemTitle,
   StyledItemCategoryText,
   StyledItemButtonDelete,
+  StyledrStatusWrrepe,
+  StyledrStatusText,
+  StyledTogglePurchasedStatus,
 } from "./StyledItem.js";
 import ModalDelete from "../ModalDelete/ModalDelete.js";
 
@@ -59,7 +59,9 @@ export default function Item({
           onClick={(event) => {
             event.stopPropagation();
             event.preventDefault();
-            openModal(item.id);
+            if (!isPurchasedView) {
+              openModal(item.id);
+            }
           }}
         >
           Delete

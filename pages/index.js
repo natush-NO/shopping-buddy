@@ -13,6 +13,7 @@ export default function HomePage({
   openModal,
   closeModal,
   isListEmpty,
+  listPurchases,
   handleCancel,
   completedPurchases,
   togglePurchasedStatus,
@@ -23,6 +24,7 @@ export default function HomePage({
         showForm={showForm}
         setShowForm={setShowForm}
         isListEmpty={isListEmpty}
+        listPurchases={listPurchases}
       />
       <main>
         <ItemsList
@@ -32,6 +34,7 @@ export default function HomePage({
           closeModal={closeModal}
           selectedItemId={selectedItemId}
           isListEmpty={isListEmpty}
+          listPurchases={listPurchases}
           setShowForm={setShowForm}
           handleCancel={handleCancel}
           togglePurchasedStatus={togglePurchasedStatus}
@@ -39,7 +42,7 @@ export default function HomePage({
         />
         <ItemsList
           list={completedPurchases}
-          handleDelete={handleDelete}
+          handleDelete={null}
           openModal={openModal}
           closeModal={closeModal}
           togglePurchasedStatus={togglePurchasedStatus}

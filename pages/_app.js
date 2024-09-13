@@ -90,7 +90,10 @@ export default function App({ Component, pageProps }) {
 
   const sortedItem = sortShoppingListByCategory(shoppingItems);
   const placeholder = "/images/placeholder_image.webp";
-  const isListEmpty = shoppingItems.length === 0;
+  const isListEmpty =
+    shoppingItems.length === 0 && completedPurchases.length === 0;
+  const listPurchases =
+    shoppingItems.length === 0 && completedPurchases.length > 0;
 
   return (
     <>
@@ -107,6 +110,7 @@ export default function App({ Component, pageProps }) {
         openModal={openModal}
         closeModal={closeModal}
         isListEmpty={isListEmpty}
+        listPurchases={listPurchases}
         handleCancel={handleCancel}
         completedPurchases={completedPurchases}
         isPurchasedView={false}

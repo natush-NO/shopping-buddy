@@ -52,50 +52,6 @@ export const StyledItemLink = styled(Link)`
   }
 `;
 
-export const StyledrStatusWrrepe = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  gap: 5px;
-  margin: 0 auto;
-`;
-
-export const StyledrStatusText = styled.p`
-  font-size: 18px;
-  font-weight: 600;
-`;
-
-export const StyledTogglePurchasedStatus = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.$isPurchasedView ? "#3d3d3d" : "transparent"};
-  border: 2px solid
-    ${(props) => (props.$isPurchasedView ? "#3d3d3d" : "#3d3d3d")};
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-
-  &:after {
-    content: "${(props) => (props.$isPurchasedView ? "✔" : "")}";
-    font-size: 38px;
-    color: ${(props) => (props.$isPurchasedView ? "black" : "transparent")};
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &:hover {
-    transition: all 0.3s;
-  }
-`;
-
 export const StyledItemImageWrapper = styled.div`
   width: 150px;
   height: 150px;
@@ -129,9 +85,59 @@ export const StyledItemCategoryText = styled.p`
 export const StyledItemButtonDelete = styled.button`
   padding: 15px 20px;
 
+  &:hover {
+    background-color: ${(props) =>
+      props.$isPurchasedView ? "#555555" : "#3d3d3d"};
+    transition: all 0.4s;
+  }
+
   &:focus {
     outline: none;
-    border: 1px solid red;
+    border: ${(props) => (props.$isPurchasedView ? "1px solid red" : "")};
     border-radius: 5px;
   }
+`;
+
+export const StyledTogglePurchasedStatus = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.$isPurchasedView ? "#3d3d3d" : "transparent"};
+  border: 2px solid
+    ${(props) => (props.$isPurchasedView ? "#3d3d3d" : "#3d3d3d")};
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:after {
+    content: "${(props) => (props.$isPurchasedView ? "✔" : "")}";
+    font-size: 38px;
+    color: ${(props) => (props.$isPurchasedView ? "black" : "transparent")};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    transition: all 0.3s;
+  }
+`;
+
+export const StyledrStatusWrrepe = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 5px;
+  margin: 0 auto;
+`;
+
+export const StyledrStatusText = styled.p`
+  font-size: 18px;
+  font-weight: 600;
 `;

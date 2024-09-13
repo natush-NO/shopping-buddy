@@ -1,5 +1,4 @@
 import Item from "../Item/Item";
-
 import {
   StyledContainerList,
   StyledTitleItems,
@@ -16,14 +15,13 @@ export default function ItemsList({
   closeModal,
   selectedItemId,
   isListEmpty,
+  listPurchases,
   setShowForm,
   handleCancel,
   togglePurchasedStatus,
   isPurchasedView = false,
 }) {
   const itemCount = list.length;
-
-  const allItemsPurchased = list.every((item) => item.isPurchased);
 
   return (
     <StyledContainerList $isPurchasedView={isPurchasedView}>
@@ -32,19 +30,19 @@ export default function ItemsList({
           ? `Purchased goods (${itemCount})`
           : `Shopping List (${itemCount})`}
       </StyledTitleItems>
-      {isPurchasedView && allItemsPurchased ? (
+      {isListEmpty ? (
         <StyledEmptyMessage>
           <StyledEmptyMessageText>
-            All purchases have been completed.
+            No items in the shopping list.
           </StyledEmptyMessageText>
           <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
             Add new items
           </StyledEmptyMessageButton>
         </StyledEmptyMessage>
-      ) : isListEmpty ? (
+      ) : listPurchases ? (
         <StyledEmptyMessage>
           <StyledEmptyMessageText>
-            No items in the shopping list.
+            All purchases have been completed.
           </StyledEmptyMessageText>
           <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
             Add new items
