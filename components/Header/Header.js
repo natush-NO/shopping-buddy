@@ -4,17 +4,21 @@ export default function Header({
   showForm,
   setShowForm,
   titleSize,
-  paddingSize,
+  paddingSizeHeader,
+  paddingSizeButton,
   isListEmpty,
   listPurchases,
 }) {
   return (
-    <StyledHeader $padding={paddingSize}>
+    <StyledHeader $paddingHeader={paddingSizeHeader}>
       <StyledTitleHeader $fontSize={titleSize}>
         Shopping Buddy
       </StyledTitleHeader>
       {!showForm && !isListEmpty && !listPurchases && (
-        <ToggleButton onClick={() => setShowForm(!showForm)}>
+        <ToggleButton
+          onClick={() => setShowForm(!showForm)}
+          $paddingButton={paddingSizeButton}
+        >
           Add Item
         </ToggleButton>
       )}

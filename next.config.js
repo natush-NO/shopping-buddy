@@ -19,7 +19,7 @@ const nextConfig = {
       "anotherdomain.com",
       "media.istockphoto.com",
       "images.unsplash.com",
-    ], // Додано новий домен
+    ],
   },
 };
 

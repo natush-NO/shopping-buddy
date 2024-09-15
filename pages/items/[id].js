@@ -30,15 +30,15 @@ export default function ShoppingItemDetails({ sortedItem, placeholder }) {
 
   const item = sortedItem.find((item) => item.id === id);
 
-  const handleImageClick = () => {
+  function handleImageClick() {
     setModalImageSrc(item.imageUrl);
     setModalItemName(item.name);
     setIsModalOpen(true);
-  };
+  }
 
-  const closeModal = () => {
+  function closeModal() {
     setIsModalOpen(false);
-  };
+  }
 
   if (!item) return <p>Item not found</p>;
 

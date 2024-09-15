@@ -1,5 +1,5 @@
 import Header from "@/components/Header/Header";
-import ItemsList from "@/components/ItemsList/ItemsList";
+import ShoppingItemsList from "@/components/ShoppingItemsList/ShoppingItemsList";
 import ShoppingItemForm from "@/components/ShoppingItemForm/ShoppingItemForm";
 
 export default function HomePage({
@@ -27,7 +27,7 @@ export default function HomePage({
         listPurchases={listPurchases}
       />
       <main>
-        <ItemsList
+        <ShoppingItemsList
           list={sortedItem}
           handleDelete={handleDelete}
           openModal={openModal}
@@ -40,7 +40,7 @@ export default function HomePage({
           togglePurchasedStatus={togglePurchasedStatus}
           isPurchasedView={false}
         />
-        <ItemsList
+        <ShoppingItemsList
           list={completedPurchases}
           handleDelete={null}
           openModal={openModal}

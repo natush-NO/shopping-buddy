@@ -81,7 +81,7 @@ export const StyledImage = styled(Image)`
   }
 `;
 
-export const StyledParagraph = styled.p`
+export const StyledParagraph = styled.div`
   font-weight: 600;
   font-size: 22px;
 

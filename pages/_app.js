@@ -31,10 +31,10 @@ export default function App({ Component, pageProps }) {
     }
   );
 
-  const handleAddItem = (newItem) => {
+  function handleAddItem(newItem) {
     const newTaskObject = { ...newItem, id: uid() };
     setShoppingItems([newTaskObject, ...shoppingItems]);
-  };
+  }
 
   const router = useRouter();
 
@@ -43,10 +43,10 @@ export default function App({ Component, pageProps }) {
     router.push("/");
   }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setSelectedItemId(null);
     router.push("/");
-  };
+  }
 
   function openModal(id) {
     setSelectedItemId(id);
@@ -112,6 +112,7 @@ export default function App({ Component, pageProps }) {
         isListEmpty={isListEmpty}
         listPurchases={listPurchases}
         handleCancel={handleCancel}
+        shoppingItems={shoppingItems}
         completedPurchases={completedPurchases}
         isPurchasedView={false}
         togglePurchasedStatus={togglePurchasedStatus}
