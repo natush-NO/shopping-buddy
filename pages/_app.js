@@ -97,9 +97,10 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleEditItem(updatedItem) {
-    // Тут можна додати логіку оновлення елемента
-    console.log("Edited item:", updatedItem);
-    setShowFormEdit(false); // Закрити форму після редагування
+    setShoppingItems((prevItems) =>
+      prevItems.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+    );
+    setShowFormEdit(false);
   }
 
   const sortedItem = sortShoppingListByCategory(shoppingItems);

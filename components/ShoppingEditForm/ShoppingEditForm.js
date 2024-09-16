@@ -1,5 +1,7 @@
 import useLocalStorageState from "use-local-storage-state";
+import { useEffect } from "react";
 import categories from "@/utils/categories.json";
+import handleSubmit from "@/utils/errorHandlersSubmitForm";
 import {
   StyledFormContainer,
   StyledFormTitle,
@@ -12,41 +14,38 @@ import {
   StyledErrorMessage,
 } from "../ShoppingItemForm/StyledShoppingItemForm";
 
-const errorMessages = {
-  name: "Name is required",
-  quantity: "Quantity must be a number greater than 0",
-  category: "Please select a category",
-};
-
 export default function ShoppingEditForm({
   onAddItem,
   setShowFormEdit,
   initialItem,
 }) {
-  const [name, setName] = useLocalStorageState("form-name", {
+  const [name, setName] = useLocalStorageState("edit-form-name", {
     defaultValue: initialItem.name || "",
   });
-  const [quantity, setQuantity] = useLocalStorageState("form-quantity", {
+  const [quantity, setQuantity] = useLocalStorageState("edit-form-quantity", {
     defaultValue: initialItem.quantity || "",
   });
-  const [category, setCategory] = useLocalStorageState("form-category", {
+  const [category, setCategory] = useLocalStorageState("edit-form-category", {
     defaultValue: initialItem.category || "",
   });
-  const [comment, setComment] = useLocalStorageState("form-comment", {
+  const [comment, setComment] = useLocalStorageState("edit-form-comment", {
     defaultValue: initialItem.comment || "",
   });
-  const [errors, setErrors] = useLocalStorageState("form-errors", {
+  const [errors, setErrors] = useLocalStorageState("edit-form-errors", {
     defaultValue: {},
   });
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    let formErrors = {};
+  useEffect(() => {
+    setName(initialItem.name || "");
+    setQuantity(initialItem.quantity || "");
+    setCategory(initialItem.category || "");
+    setComment(initialItem.comment || "");
+  }, [initialItem, setName, setQuantity, setCategory, setComment]);
 
-    if (!name) formErrors.name = errorMessages.name;
-    if (!quantity || isNaN(quantity) || quantity <= 0)
-      formErrors.quantity = errorMessages.quantity;
-    if (!category) formErrors.category = errorMessages.category;
+  function handleSubmitWrapper(event) {
+    event.preventDefault();
+
+    const formErrors = handleSubmit(event, name, quantity, category, setErrors);
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
@@ -65,14 +64,20 @@ export default function ShoppingEditForm({
     setShowFormEdit(false);
   }
 
-  function handleCancel() {
+  const handleCancel = () => {
+    setName(initialItem.name || "");
+    setQuantity(initialItem.quantity || "");
+    setCategory(initialItem.category || "");
+    setComment(initialItem.comment || "");
+    setErrors({});
+
     setShowFormEdit(false);
-  }
+  };
 
   return (
     <StyledFormContainer>
       <StyledFormTitle>Edit Shopping Item</StyledFormTitle>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitWrapper}>
         <StyledInputField>
           <StyledLabel htmlFor="name">Shopping Item Name</StyledLabel>
           <StyledInput

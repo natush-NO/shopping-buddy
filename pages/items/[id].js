@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { useRouter } from "next/router";
 import {
@@ -27,21 +28,46 @@ export default function ShoppingItemDetails({
   const [isModalOpen, setIsModalOpen] = useLocalStorageState("is-modal-open", {
     defaultValue: false,
   });
-  const [modalImageSrc, setModalImageSrc] = useLocalStorageState(
-    "modal-image-src",
-    { defaultValue: "" }
-  );
-  const [modalItemName, setModalItemName] = useLocalStorageState(
-    "modal-item-name",
-    { defaultValue: "" }
-  );
+
+  const [itemName, setItemName] = useLocalStorageState("modal-item-name", {
+    defaultValue: "",
+  });
+  const [imageSrc, setImageSrc] = useLocalStorageState("modal-image-src", {
+    defaultValue: "",
+  });
+
+  const [quantity, setQuantity] = useLocalStorageState("quantity", {
+    defaultValue: "",
+  });
+
+  const [category, setCategory] = useLocalStorageState("category", {
+    defaultValue: "",
+  });
+
+  const [comment, setComment] = useLocalStorageState("comment", {
+    defaultValue: "",
+  });
 
   const item = sortedItem.find((item) => item.id === id);
 
-  function handleImageClick() {
-    setModalImageSrc(item.imageUrl);
-    setModalItemName(item.name);
-    setIsModalOpen(true);
+  useEffect(() => {
+    if (item) {
+      setItemName(item.name);
+      setQuantity(item.quantity);
+      setCategory(item.category);
+      setComment(item.comment);
+    }
+  }, [item]);
+
+  function retrieveProductData() {
+    if (item) {
+      setItemName(item.name);
+      setImageSrc(item.imageUrl);
+      setQuantity(item.quantity);
+      setCategory(item.category);
+      setComment(item.comment);
+      setIsModalOpen(true);
+    }
   }
 
   function closeModal() {
@@ -55,14 +81,14 @@ export default function ShoppingItemDetails({
       <Header showForm={true} $paddingSize="20px 0" $titleSize="50px" />
       {isModalOpen && (
         <ModalImageDetails
-          imageSrc={modalImageSrc}
-          itemName={modalItemName}
+          imageSrc={imageSrc}
+          itemName={itemName}
           onClose={closeModal}
         />
       )}
       <StyledContainer>
         <StyledTitle>{item.name}</StyledTitle>
-        <StyledImageContainer onClick={handleImageClick}>
+        <StyledImageContainer onClick={retrieveProductData}>
           <StyledImage
             src={item.imageUrl ? item.imageUrl : placeholder}
             alt={item.name}

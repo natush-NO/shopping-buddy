@@ -1,5 +1,6 @@
 import useLocalStorageState from "use-local-storage-state";
 import categories from "@/utils/categories.json";
+import handleSubmit from "@/utils/errorHandlersSubmitForm";
 import {
   StyledFormContainer,
   StyledFormTitle,
@@ -12,37 +13,27 @@ import {
   StyledErrorMessage,
 } from "./StyledShoppingItemForm";
 
-const errorMessages = {
-  name: "Name is required",
-  quantity: "Quantity must be a number greater than 0",
-  category: "Please select a category",
-};
-
 export default function ShoppingItemForm({ onAddItem, setShowForm }) {
-  const [name, setName] = useLocalStorageState("form-name", {
+  const [name, setName] = useLocalStorageState("create-form-name", {
     defaultValue: "",
   });
-  const [quantity, setQuantity] = useLocalStorageState("form-quantity", {
+  const [quantity, setQuantity] = useLocalStorageState("create-form-quantity", {
     defaultValue: "1",
   });
-  const [category, setCategory] = useLocalStorageState("form-category", {
+  const [category, setCategory] = useLocalStorageState("create-form-category", {
     defaultValue: "",
   });
-  const [comment, setComment] = useLocalStorageState("form-comment", {
+  const [comment, setComment] = useLocalStorageState("create-form-comment", {
     defaultValue: "",
   });
-  const [errors, setErrors] = useLocalStorageState("form-errors", {
+  const [errors, setErrors] = useLocalStorageState("create-form-errors", {
     defaultValue: {},
   });
 
-  function handleSubmit(event) {
+  function handleSubmitWrapper(event) {
     event.preventDefault();
-    let formErrors = {};
 
-    if (!name) formErrors.name = errorMessages.name;
-    if (!quantity || isNaN(quantity) || quantity <= 0)
-      formErrors.quantity = errorMessages.quantity;
-    if (!category) formErrors.category = errorMessages.category;
+    const formErrors = handleSubmit(event, name, quantity, category, setErrors);
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
@@ -78,7 +69,7 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
   return (
     <StyledFormContainer>
       <StyledFormTitle>Create Shopping Item</StyledFormTitle>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitWrapper}>
         <StyledInputField>
           <StyledLabel htmlFor="name">Shopping Item Name</StyledLabel>
           <StyledInput
