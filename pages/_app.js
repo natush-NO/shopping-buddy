@@ -1,35 +1,43 @@
 import GlobalStyle from "../styles";
-import useLocalStorageState from "use-local-storage-state";
+// import useLocalStorageState from "use-local-storage-state";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { initialShoppingList } from "@/lib/data";
 import { uid } from "uid";
 import sortShoppingListByCategory from "@/utils/sortShoppingListByCategory";
 
 export default function App({ Component, pageProps }) {
-  const [shoppingItems, setShoppingItems] = useLocalStorageState(
-    "shopping-items",
-    {
-      defaultValue: initialShoppingList,
-    }
-  );
+  const [shoppingItems, setShoppingItems] = useState(initialShoppingList);
 
-  const [showForm, setShowForm] = useLocalStorageState("show-form", {
-    defaultValue: false,
-  });
+  const [showForm, setShowForm] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [completedPurchases, setCompletedPurchases] = useState([]);
+  const [showFormEdit, setShowFormEdit] = useState(false);
 
-  const [selectedItemId, setSelectedItemId] = useLocalStorageState(
-    "selected-item-id",
-    {
-      defaultValue: null,
-    }
-  );
+  // const [shoppingItems, setShoppingItems] = useLocalStorageState(
+  //   "shopping-items",
+  //   {
+  //     defaultValue: initialShoppingList,
+  //   }
+  // );
 
-  const [completedPurchases, setCompletedPurchases] = useLocalStorageState(
-    "completedPurchases",
-    {
-      defaultValue: [],
-    }
-  );
+  // const [showForm, setShowForm] = useLocalStorageState("show-form", {
+  //   defaultValue: false,
+  // });
+
+  // const [selectedItemId, setSelectedItemId] = useLocalStorageState(
+  //   "selected-item-id",
+  //   {
+  //     defaultValue: null,
+  //   }
+  // );
+
+  // const [completedPurchases, setCompletedPurchases] = useLocalStorageState(
+  //   "completedPurchases",
+  //   {
+  //     defaultValue: [],
+  //   }
+  // );
 
   function handleAddItem(newItem) {
     const newTaskObject = { ...newItem, id: uid() };
@@ -88,6 +96,12 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleEditItem(updatedItem) {
+    // Тут можна додати логіку оновлення елемента
+    console.log("Edited item:", updatedItem);
+    setShowFormEdit(false); // Закрити форму після редагування
+  }
+
   const sortedItem = sortShoppingListByCategory(shoppingItems);
   const placeholder = "/images/placeholder_image.webp";
   const isListEmpty =
@@ -116,6 +130,9 @@ export default function App({ Component, pageProps }) {
         completedPurchases={completedPurchases}
         isPurchasedView={false}
         togglePurchasedStatus={togglePurchasedStatus}
+        showFormEdit={showFormEdit}
+        setShowFormEdit={setShowFormEdit}
+        handleEditItem={handleEditItem}
       />
     </>
   );

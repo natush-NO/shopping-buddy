@@ -51,9 +51,9 @@ export const ToggleButton = styled.button`
   margin-top: 15px;
   display: ${({ $showForm }) => ($showForm ? "none" : "block")};
 
-  padding: ${(props) => props.$paddingButton || "6px 12px"};
+  padding: 6px 12px;
 
   @media (min-width: 767px) {
-    padding: ${(props) => props.$paddingButton || "10px 35px"};
+    padding: 10px 35px;
   }
 `;

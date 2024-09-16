@@ -110,10 +110,24 @@ export const StyledValue = styled.span`
   font-weight: 400;
 `;
 
+export const StyledEditButton = styled.button`
+  font-size: 16px;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: ${({ $showForm }) => ($showForm ? "none" : "block")};
+  padding: 6px 12px;
+
+  @media (min-width: 800px) {
+    font-size: 24px;
+    padding: 10px 25px;
+    letter-spacing: 2px;
+  }
+`;
+
 export const StyledBackLink = styled(Link)`
   font-size: 14px;
   padding: 5px 10px;
-  margin-top: 20px;
+  margin-top: 5px;
   background-color: #3d3d3d;
   color: white;
   border-radius: 4px;
@@ -130,15 +144,15 @@ export const StyledBackLink = styled(Link)`
     border: 1px solid #3d3d3d;
   }
 
-  @media (min-width: 391px) {
+  @media (min-width: 375px) {
     font-size: 16px;
-    padding: 15px 25px;
-    margin-top: 30px;
+    padding: 10px 20px;
+    margin-top: 10px;
   }
 
   @media (min-width: 801px) {
     font-size: 18px;
     padding: 20px 30px;
-    margin-top: 60px;
+    margin-top: 20px;
   }
 `;

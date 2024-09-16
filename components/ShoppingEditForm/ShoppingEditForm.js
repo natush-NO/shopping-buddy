@@ -10,7 +10,7 @@ import {
   StyledTextarea,
   StyledButton,
   StyledErrorMessage,
-} from "./StyledShoppingItemForm";
+} from "../ShoppingItemForm/StyledShoppingItemForm";
 
 const errorMessages = {
   name: "Name is required",
@@ -18,18 +18,22 @@ const errorMessages = {
   category: "Please select a category",
 };
 
-export default function ShoppingItemForm({ onAddItem, setShowForm }) {
+export default function ShoppingEditForm({
+  onAddItem,
+  setShowFormEdit,
+  initialItem,
+}) {
   const [name, setName] = useLocalStorageState("form-name", {
-    defaultValue: "",
+    defaultValue: initialItem.name || "",
   });
   const [quantity, setQuantity] = useLocalStorageState("form-quantity", {
-    defaultValue: "1",
+    defaultValue: initialItem.quantity || "",
   });
   const [category, setCategory] = useLocalStorageState("form-category", {
-    defaultValue: "",
+    defaultValue: initialItem.category || "",
   });
   const [comment, setComment] = useLocalStorageState("form-comment", {
-    defaultValue: "",
+    defaultValue: initialItem.comment || "",
   });
   const [errors, setErrors] = useLocalStorageState("form-errors", {
     defaultValue: {},
@@ -49,35 +53,25 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
       return;
     }
 
-    const newItem = {
+    const updatedItem = {
+      ...initialItem,
       name,
       quantity: parseInt(quantity, 10),
       category,
       comment,
     };
 
-    onAddItem(newItem);
-    setName("");
-    setQuantity("1");
-    setCategory("");
-    setComment("");
-    setErrors({});
-    if (setShowForm) setShowForm(false);
+    onAddItem(updatedItem);
+    setShowFormEdit(false);
   }
 
-  const handleCancel = () => {
-    setName("");
-    setQuantity("1");
-    setCategory("");
-    setComment("");
-    setErrors({});
-
-    if (setShowForm) setShowForm(false);
-  };
+  function handleCancel() {
+    setShowFormEdit(false);
+  }
 
   return (
     <StyledFormContainer>
-      <StyledFormTitle>Create Shopping Item</StyledFormTitle>
+      <StyledFormTitle>Edit Shopping Item</StyledFormTitle>
       <form onSubmit={handleSubmit}>
         <StyledInputField>
           <StyledLabel htmlFor="name">Shopping Item Name</StyledLabel>
@@ -140,7 +134,7 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
         </StyledInputField>
 
         <div>
-          <StyledButton type="submit">Add Item</StyledButton>
+          <StyledButton type="submit">Edit Item</StyledButton>
           <StyledButton $cancel type="button" onClick={handleCancel}>
             Cancel
           </StyledButton>

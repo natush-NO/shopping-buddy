@@ -8,12 +8,20 @@ import {
   StyledParagraph,
   StyledLabel,
   StyledValue,
+  StyledEditButton,
   StyledBackLink,
 } from "@/components/ShoppingItemDetails/StyledShoppingItemDetails";
 import Header from "@/components/Header/Header";
 import ModalImageDetails from "@/components/ShoppingItemDetails/ModalShoppingItemDetails/ModalShoppingItemDetails";
+import ShoppingEditForm from "@/components/ShoppingEditForm/ShoppingEditForm";
 
-export default function ShoppingItemDetails({ sortedItem, placeholder }) {
+export default function ShoppingItemDetails({
+  sortedItem,
+  placeholder,
+  showFormEdit,
+  setShowFormEdit,
+  handleEditItem,
+}) {
   const router = useRouter();
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useLocalStorageState("is-modal-open", {
@@ -75,6 +83,18 @@ export default function ShoppingItemDetails({ sortedItem, placeholder }) {
           <StyledLabel>Comments:</StyledLabel>{" "}
           <StyledValue>{item.comment}</StyledValue>
         </StyledParagraph>
+        {showFormEdit ? (
+          <ShoppingEditForm
+            onAddItem={handleEditItem}
+            setShowFormEdit={setShowFormEdit}
+            initialItem={item}
+          />
+        ) : (
+          <StyledEditButton onClick={() => setShowFormEdit(true)}>
+            Edit
+          </StyledEditButton>
+        )}
+
         <StyledBackLink href="/">Back to Shopping List</StyledBackLink>
       </StyledContainer>
     </>
