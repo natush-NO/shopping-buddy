@@ -1,43 +1,39 @@
 import GlobalStyle from "../styles";
-// import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { useRouter } from "next/router";
 import { initialShoppingList } from "@/lib/data";
 import { uid } from "uid";
 import sortShoppingListByCategory from "@/utils/sortShoppingListByCategory";
 
 export default function App({ Component, pageProps }) {
-  const [shoppingItems, setShoppingItems] = useState(initialShoppingList);
+  const [shoppingItems, setShoppingItems] = useLocalStorageState(
+    "shopping-items",
+    {
+      defaultValue: initialShoppingList,
+    }
+  );
 
-  const [showForm, setShowForm] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState(null);
-  const [completedPurchases, setCompletedPurchases] = useState([]);
-  const [showFormEdit, setShowFormEdit] = useState(false);
+  const [showForm, setShowForm] = useLocalStorageState("show-form", {
+    defaultValue: false,
+  });
 
-  // const [shoppingItems, setShoppingItems] = useLocalStorageState(
-  //   "shopping-items",
-  //   {
-  //     defaultValue: initialShoppingList,
-  //   }
-  // );
+  const [selectedItemId, setSelectedItemId] = useLocalStorageState(
+    "selected-item-id",
+    {
+      defaultValue: null,
+    }
+  );
 
-  // const [showForm, setShowForm] = useLocalStorageState("show-form", {
-  //   defaultValue: false,
-  // });
+  const [completedPurchases, setCompletedPurchases] = useLocalStorageState(
+    "completedPurchases",
+    {
+      defaultValue: [],
+    }
+  );
 
-  // const [selectedItemId, setSelectedItemId] = useLocalStorageState(
-  //   "selected-item-id",
-  //   {
-  //     defaultValue: null,
-  //   }
-  // );
-
-  // const [completedPurchases, setCompletedPurchases] = useLocalStorageState(
-  //   "completedPurchases",
-  //   {
-  //     defaultValue: [],
-  //   }
-  // );
+  const [showFormEdit, setShowFormEdit] = useLocalStorageState("showFormEdit", {
+    defaultValue: false,
+  });
 
   function handleAddItem(newItem) {
     const newTaskObject = { ...newItem, id: uid() };

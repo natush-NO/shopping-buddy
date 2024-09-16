@@ -14,7 +14,7 @@ import {
 } from "@/components/ShoppingItemDetails/StyledShoppingItemDetails";
 import Header from "@/components/Header/Header";
 import ModalImageDetails from "@/components/ShoppingItemDetails/ModalShoppingItemDetails/ModalShoppingItemDetails";
-import ShoppingEditForm from "@/components/ShoppingEditForm/ShoppingEditForm";
+import ShoppingEditForm from "@/components/ShoppingForms/ShoppingEditForm";
 
 export default function ShoppingItemDetails({
   sortedItem,

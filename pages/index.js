@@ -1,7 +1,6 @@
 import Header from "@/components/Header/Header";
 import ShoppingItemsList from "@/components/ShoppingItemsList/ShoppingItemsList";
-import ShoppingItemForm from "@/components/ShoppingItemForm/ShoppingItemForm";
-import ShoppingItemDetails from "./items/[id]";
+import ShoppingItemForm from "@/components/ShoppingForms/ShoppingItemForm";
 
 export default function HomePage({
   sortedItem,
