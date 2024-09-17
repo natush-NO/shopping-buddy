@@ -35,6 +35,10 @@ export default function App({ Component, pageProps }) {
     defaultValue: false,
   });
 
+  const [errors, setErrors] = useLocalStorageState("errorMessages", {
+    defaultValue: "",
+  });
+
   function handleAddItem(newItem) {
     const newTaskObject = { ...newItem, id: uid() };
     setShoppingItems([newTaskObject, ...shoppingItems]);
@@ -92,15 +96,13 @@ export default function App({ Component, pageProps }) {
     }
   }
 
-  function handleEditItem(updatedItem) {
+  function handleEditItem(updatedItem, id) {
     setShoppingItems((prevItems) =>
-      prevItems.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+      prevItems.map((item) => (item.id === id ? { ...updatedItem, id } : item))
     );
-    setShowFormEdit(false);
   }
 
   const sortedItem = sortShoppingListByCategory(shoppingItems);
-  const placeholder = "/images/placeholder_image.webp";
   const isListEmpty =
     shoppingItems.length === 0 && completedPurchases.length === 0;
   const listPurchases =
@@ -115,7 +117,6 @@ export default function App({ Component, pageProps }) {
         handleAddItem={handleAddItem}
         showForm={showForm}
         setShowForm={setShowForm}
-        placeholder={placeholder}
         handleDelete={handleDelete}
         selectedItemId={selectedItemId}
         openModal={openModal}
@@ -130,6 +131,8 @@ export default function App({ Component, pageProps }) {
         showFormEdit={showFormEdit}
         setShowFormEdit={setShowFormEdit}
         handleEditItem={handleEditItem}
+        errors={errors}
+        setErrors={setErrors}
       />
     </>
   );

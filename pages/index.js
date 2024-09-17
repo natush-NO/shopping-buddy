@@ -1,13 +1,12 @@
 import Header from "@/components/Header/Header";
 import ShoppingItemsList from "@/components/ShoppingItemsList/ShoppingItemsList";
-import ShoppingItemForm from "@/components/ShoppingForms/ShoppingItemForm";
+import ShoppingAddItemForm from "@/components/ShoppingForms/ShoppingIAddtemForm";
 
 export default function HomePage({
   sortedItem,
   handleAddItem,
   showForm,
   setShowForm,
-  placeholder,
   handleDelete,
   selectedItemId,
   openModal,
@@ -17,6 +16,8 @@ export default function HomePage({
   handleCancel,
   completedPurchases,
   togglePurchasedStatus,
+  errors,
+  setErrors,
 }) {
   return (
     <>
@@ -49,10 +50,11 @@ export default function HomePage({
           isPurchasedView={true}
         />
         {showForm && (
-          <ShoppingItemForm
+          <ShoppingAddItemForm
             onAddItem={handleAddItem}
             setShowForm={setShowForm}
-            placeholder={placeholder}
+            errors={errors}
+            setErrors={setErrors}
           />
         )}
       </main>

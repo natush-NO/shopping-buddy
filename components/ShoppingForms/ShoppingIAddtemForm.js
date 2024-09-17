@@ -1,7 +1,6 @@
 import useLocalStorageState from "use-local-storage-state";
-import { useEffect } from "react";
 import categories from "@/utils/categories.json";
-import handleSubmit from "@/utils/errorHandlersSubmitForm";
+import handleSubmitError from "@/utils/errorHandlersSubmitForm";
 import {
   StyledOverlay,
   StyledFormContainer,
@@ -15,70 +14,71 @@ import {
   StyledErrorMessage,
 } from "./StyledShoppingForm";
 
-export default function ShoppingEditForm({
+export default function ShoppingAddItemForm({
   onAddItem,
-  setShowFormEdit,
-  initialItem,
+  setShowForm,
+  errors,
+  setErrors,
 }) {
-  const [name, setName] = useLocalStorageState("edit-form-name", {
-    defaultValue: initialItem.name || "",
+  const [name, setName] = useLocalStorageState("create-form-name", {
+    defaultValue: "",
   });
-  const [quantity, setQuantity] = useLocalStorageState("edit-form-quantity", {
-    defaultValue: initialItem.quantity || "",
+  const [quantity, setQuantity] = useLocalStorageState("create-form-quantity", {
+    defaultValue: "1",
   });
-  const [category, setCategory] = useLocalStorageState("edit-form-category", {
-    defaultValue: initialItem.category || "",
+  const [category, setCategory] = useLocalStorageState("create-form-category", {
+    defaultValue: "",
   });
-  const [comment, setComment] = useLocalStorageState("edit-form-comment", {
-    defaultValue: initialItem.comment || "",
+  const [comment, setComment] = useLocalStorageState("create-form-comment", {
+    defaultValue: "",
   });
-  const [errors, setErrors] = useLocalStorageState("edit-form-errors", {
-    defaultValue: {},
-  });
-
-  useEffect(() => {
-    setName(initialItem.name || "");
-    setQuantity(initialItem.quantity || "");
-    setCategory(initialItem.category || "");
-    setComment(initialItem.comment || "");
-  }, [initialItem, setName, setQuantity, setCategory, setComment]);
 
   function handleSubmitWrapper(event) {
     event.preventDefault();
 
-    const formErrors = handleSubmit(event, name, quantity, category, setErrors);
+    const formErrors = handleSubmitError(
+      event,
+      name,
+      quantity,
+      category,
+      setErrors
+    );
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
-    const updatedItem = {
-      ...initialItem,
+    const newItem = {
       name,
       quantity: parseInt(quantity, 10),
       category,
       comment,
     };
 
-    onAddItem(updatedItem);
-    setShowFormEdit(false);
+    onAddItem(newItem);
+    setName("");
+    setQuantity("1");
+    setCategory("");
+    setComment("");
+    setErrors({});
+    if (setShowForm) setShowForm(false);
   }
 
   const handleCancel = () => {
-    setName(initialItem.name || "");
-    setQuantity(initialItem.quantity || "");
-    setCategory(initialItem.category || "");
-    setComment(initialItem.comment || "");
+    setName("");
+    setQuantity("1");
+    setCategory("");
+    setComment("");
     setErrors({});
 
-    setShowFormEdit(false);
+    if (setShowForm) setShowForm(false);
   };
 
   return (
     <StyledOverlay>
       <StyledFormContainer>
-        <StyledFormTitle>Edit Shopping Item</StyledFormTitle>
+        <StyledFormTitle>Create Shopping Item</StyledFormTitle>
         <form onSubmit={handleSubmitWrapper}>
           <StyledInputField>
             <StyledLabel htmlFor="name">Shopping Item Name</StyledLabel>
@@ -141,7 +141,7 @@ export default function ShoppingEditForm({
           </StyledInputField>
 
           <div>
-            <StyledButton type="submit">Edit Item</StyledButton>
+            <StyledButton type="submit">Add Item</StyledButton>
             <StyledButton $cancel type="button" onClick={handleCancel}>
               Cancel
             </StyledButton>

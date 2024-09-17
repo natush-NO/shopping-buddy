@@ -194,7 +194,7 @@ export const StyledStatusArray = styled.span`
 `;
 
 export const StyledTogglePurchasedStatus = styled.button`
-  width: 50px;
+  width: 65px;
   height: 30px;
   border-radius: 5px;
   margin-top: 5px;
@@ -229,6 +229,20 @@ export const StyledTogglePurchasedStatus = styled.button`
       &:after {
         color: ${(props) => (props.$isPurchasedView ? "white" : "transparent")};
       }
+    }
+  }
+
+  &:focus {
+    background-color: ${(props) =>
+      props.$isPurchasedView ? "red" : "#3d3d3d"};
+    box-shadow: ${(props) =>
+      props.$isPurchasedView
+        ? "none"
+        : "0 1px 5px 1px rgba(0, 0, 0, 0.259),  0 -1px 5px 1px rgba(0, 0, 0, 0.259)"};
+
+    &:after {
+      color: ${(props) =>
+        props.$isPurchasedView ? "transparent" : "transparent"};
     }
   }
 `;

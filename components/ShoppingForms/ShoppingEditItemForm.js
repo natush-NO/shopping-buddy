@@ -1,6 +1,5 @@
-import useLocalStorageState from "use-local-storage-state";
 import categories from "@/utils/categories.json";
-import handleSubmit from "@/utils/errorHandlersSubmitForm";
+import handleSubmitError from "@/utils/errorHandlersSubmitForm";
 import {
   StyledOverlay,
   StyledFormContainer,
@@ -14,77 +13,74 @@ import {
   StyledErrorMessage,
 } from "./StyledShoppingForm";
 
-export default function ShoppingItemForm({ onAddItem, setShowForm }) {
-  const [name, setName] = useLocalStorageState("create-form-name", {
-    defaultValue: "",
-  });
-  const [quantity, setQuantity] = useLocalStorageState("create-form-quantity", {
-    defaultValue: "1",
-  });
-  const [category, setCategory] = useLocalStorageState("create-form-category", {
-    defaultValue: "",
-  });
-  const [comment, setComment] = useLocalStorageState("create-form-comment", {
-    defaultValue: "",
-  });
-  const [errors, setErrors] = useLocalStorageState("create-form-errors", {
-    defaultValue: {},
-  });
-
+export default function ShoppingEditItemForm({
+  onAddItem,
+  setShowFormEdit,
+  initialItem,
+  errors,
+  setErrors,
+}) {
   function handleSubmitWrapper(event) {
     event.preventDefault();
 
-    const formErrors = handleSubmit(event, name, quantity, category, setErrors);
+    const formData = new FormData(event.target);
+    const name = formData.get("name");
+    const quantity = formData.get("quantity");
+    const category = formData.get("category");
+    const comment = formData.get("comment");
+
+    const formErrors = handleSubmitError(
+      event,
+      name,
+      quantity,
+      category,
+      setErrors
+    );
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
-    const newItem = {
+    const updatedItem = {
+      ...initialItem,
       name,
       quantity: parseInt(quantity, 10),
       category,
       comment,
     };
 
-    onAddItem(newItem);
-    setName("");
-    setQuantity("1");
-    setCategory("");
-    setComment("");
-    setErrors({});
-    if (setShowForm) setShowForm(false);
+    onAddItem(updatedItem, initialItem.id);
+    setShowFormEdit(false);
   }
 
   const handleCancel = () => {
-    setName("");
-    setQuantity("1");
-    setCategory("");
-    setComment("");
+    initialItem.name || "";
+    initialItem.quantity || "";
+    initialItem.category || "";
+    initialItem.comment || "";
     setErrors({});
 
-    if (setShowForm) setShowForm(false);
+    setShowFormEdit(false);
   };
 
   return (
     <StyledOverlay>
       <StyledFormContainer>
-        <StyledFormTitle>Create Shopping Item</StyledFormTitle>
+        <StyledFormTitle>Edit Shopping Item</StyledFormTitle>
         <form onSubmit={handleSubmitWrapper}>
           <StyledInputField>
             <StyledLabel htmlFor="name">Shopping Item Name</StyledLabel>
             <StyledInput
               type="text"
               id="name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              name="name"
+              defaultValue={initialItem.name}
             />
             {errors.name && (
               <StyledErrorMessage>{errors.name}</StyledErrorMessage>
             )}
           </StyledInputField>
-
           <StyledInputField>
             <StyledLabel $labelQuantity htmlFor="quantity">
               Quantity
@@ -93,9 +89,9 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
               $inputQuantity={true}
               type="number"
               id="quantity"
-              value={quantity}
+              name="quantity"
+              defaultValue={initialItem.quantity}
               min="0"
-              onChange={(event) => setQuantity(event.target.value)}
             />
             {errors.quantity && (
               <StyledErrorMessage $labelQuantity>
@@ -103,13 +99,12 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
               </StyledErrorMessage>
             )}
           </StyledInputField>
-
           <StyledInputField>
             <StyledLabel htmlFor="category">Category</StyledLabel>
             <StyledSelect
               id="category"
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
+              name="category"
+              defaultValue={initialItem.category}
             >
               <option value="">Please select a category</option>
               {categories.map((cat) => (
@@ -122,18 +117,16 @@ export default function ShoppingItemForm({ onAddItem, setShowForm }) {
               <StyledErrorMessage>{errors.category}</StyledErrorMessage>
             )}
           </StyledInputField>
-
           <StyledInputField>
             <StyledLabel htmlFor="comment">Comment</StyledLabel>
             <StyledTextarea
               id="comment"
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
+              name="comment"
+              defaultValue={initialItem.comment}
             />
           </StyledInputField>
-
           <div>
-            <StyledButton type="submit">Add Item</StyledButton>
+            <StyledButton type="submit">Edit Item</StyledButton>
             <StyledButton $cancel type="button" onClick={handleCancel}>
               Cancel
             </StyledButton>

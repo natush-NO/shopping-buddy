@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { useRouter } from "next/router";
 import {
@@ -14,14 +13,16 @@ import {
 } from "@/components/ShoppingItemDetails/StyledShoppingItemDetails";
 import Header from "@/components/Header/Header";
 import ModalImageDetails from "@/components/ShoppingItemDetails/ModalShoppingItemDetails/ModalShoppingItemDetails";
-import ShoppingEditForm from "@/components/ShoppingForms/ShoppingEditForm";
+import ShoppingEditItemForm from "@/components/ShoppingForms/ShoppingEditItemForm";
 
 export default function ShoppingItemDetails({
   sortedItem,
-  placeholder,
+  placeholder = "/images/placeholder_image.webp",
   showFormEdit,
   setShowFormEdit,
   handleEditItem,
+  errors,
+  setErrors,
 }) {
   const router = useRouter();
   const { id } = router.query;
@@ -29,43 +30,10 @@ export default function ShoppingItemDetails({
     defaultValue: false,
   });
 
-  const [itemName, setItemName] = useLocalStorageState("modal-item-name", {
-    defaultValue: "",
-  });
-  const [imageSrc, setImageSrc] = useLocalStorageState("modal-image-src", {
-    defaultValue: "",
-  });
-
-  const [quantity, setQuantity] = useLocalStorageState("quantity", {
-    defaultValue: "",
-  });
-
-  const [category, setCategory] = useLocalStorageState("category", {
-    defaultValue: "",
-  });
-
-  const [comment, setComment] = useLocalStorageState("comment", {
-    defaultValue: "",
-  });
-
   const item = sortedItem.find((item) => item.id === id);
-
-  useEffect(() => {
-    if (item) {
-      setItemName(item.name);
-      setQuantity(item.quantity);
-      setCategory(item.category);
-      setComment(item.comment);
-    }
-  }, [item]);
 
   function retrieveProductData() {
     if (item) {
-      setItemName(item.name);
-      setImageSrc(item.imageUrl);
-      setQuantity(item.quantity);
-      setCategory(item.category);
-      setComment(item.comment);
       setIsModalOpen(true);
     }
   }
@@ -81,9 +49,10 @@ export default function ShoppingItemDetails({
       <Header showForm={true} $paddingSize="20px 0" $titleSize="50px" />
       {isModalOpen && (
         <ModalImageDetails
-          imageSrc={imageSrc}
-          itemName={itemName}
+          imageUrl={item.imageUrl}
+          altName={item.name}
           onClose={closeModal}
+          placeholder={placeholder}
         />
       )}
       <StyledContainer>
@@ -110,10 +79,12 @@ export default function ShoppingItemDetails({
           <StyledValue>{item.comment}</StyledValue>
         </StyledParagraph>
         {showFormEdit ? (
-          <ShoppingEditForm
+          <ShoppingEditItemForm
             onAddItem={handleEditItem}
             setShowFormEdit={setShowFormEdit}
             initialItem={item}
+            errors={errors}
+            setErrors={setErrors}
           />
         ) : (
           <StyledEditButton onClick={() => setShowFormEdit(true)}>
