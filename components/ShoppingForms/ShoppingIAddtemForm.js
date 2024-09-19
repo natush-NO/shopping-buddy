@@ -87,6 +87,8 @@ export default function ShoppingAddItemForm({
               id="name"
               value={name}
               onChange={(event) => setName(event.target.value)}
+              aria-required="true"
+              aria-label="Enter the name of the shopping item"
             />
             {errors.name && (
               <StyledErrorMessage>{errors.name}</StyledErrorMessage>
@@ -104,6 +106,8 @@ export default function ShoppingAddItemForm({
               value={quantity}
               min="0"
               onChange={(event) => setQuantity(event.target.value)}
+              aria-required="true"
+              aria-label="Enter the quantity of the shopping item"
             />
             {errors.quantity && (
               <StyledErrorMessage $labelQuantity>
@@ -118,6 +122,8 @@ export default function ShoppingAddItemForm({
               id="category"
               value={category}
               onChange={(event) => setCategory(event.target.value)}
+              aria-required="true"
+              aria-label="Select a category for the shopping item"
             >
               <option value="">Please select a category</option>
               {categories.map((cat) => (
@@ -137,12 +143,23 @@ export default function ShoppingAddItemForm({
               id="comment"
               value={comment}
               onChange={(event) => setComment(event.target.value)}
+              aria-label="Enter any comments about the shopping item"
             />
           </StyledInputField>
 
           <div>
-            <StyledButton type="submit">Add Item</StyledButton>
-            <StyledButton $cancel type="button" onClick={handleCancel}>
+            <StyledButton
+              type="submit"
+              aria-label="Submit the form to add a new shopping item"
+            >
+              Add Item
+            </StyledButton>
+            <StyledButton
+              $cancel
+              type="button"
+              onClick={handleCancel}
+              aria-label="Cancel adding a new shopping item and close the form"
+            >
               Cancel
             </StyledButton>
           </div>

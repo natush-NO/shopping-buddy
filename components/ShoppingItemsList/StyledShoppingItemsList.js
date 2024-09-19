@@ -26,17 +26,29 @@ export const StyledContainerList = styled.article`
   max-width: 2000px;
   padding: 0 15px;
   margin: 0 auto;
+  text-align: center;
+`;
+
+export const StyledBackwardsButton = styled.button`
+  font-size: 16px;
+  padding: 7px;
+  margin-bottom: 20px;
+
+  @media (min-width: 500px) {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
 `;
 
 export const StyledTitleItems = styled.h2`
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 800;
   color: #4a4a4a;
   text-align: center;
   margin-bottom: 15px;
 
   @media (min-width: 500px) {
-    font-size: 38px;
+    font-size: 44px;
     margin-bottom: 30px;
   }
 `;
@@ -60,10 +72,6 @@ export const StyledItems = styled.ul`
     grid-template-columns: repeat(auto-fill, 450px);
   }
 
-  @media (min-width: 750px) {
-    grid-template-columns: repeat(auto-fill, 550px);
-  }
-
   @media (min-width: 850px) {
     grid-template-columns: repeat(auto-fill, 350px);
     gap: 70px 40px;
@@ -71,6 +79,7 @@ export const StyledItems = styled.ul`
 
   @media (min-width: 965px) {
     grid-template-columns: repeat(auto-fill, 500px);
+    grid-template-rows: repeat(auto-fill, 680px);
     gap: 70px 50px;
   }
 `;
@@ -86,6 +95,10 @@ export const StyledEmptyMessageText = styled.p`
 `;
 
 export const StyledEmptyMessageButton = styled.button`
-  font-size: 32px;
+  font-size: 28px;
   padding: 15px 20px;
+
+  @media (min-width: 500px) {
+    font-size: 32px;
+  }
 `;

@@ -15,11 +15,27 @@ export const StyledModalOverlay = styled.div`
 
 export const StyledModalContent = styled.div`
   background: white;
-  padding: 50px 20px;
+  padding: 25px;
+  line-height: 1.2;
   border-radius: 5px;
-  max-width: 500px;
-  width: 100%;
   text-align: center;
+  width: 100%;
+  max-width: 300px;
+
+  @media (min-width: 420px) {
+    max-width: 350px;
+  }
+
+  @media (min-width: 600px) {
+    max-width: 500px;
+    padding: 50px 20px;
+  }
+`;
+
+export const StyledItemSureText = styled.span`
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
 `;
 
 const BaseButton = styled.button`

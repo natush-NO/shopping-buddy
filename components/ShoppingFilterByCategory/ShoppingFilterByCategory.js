@@ -16,6 +16,8 @@ export default function ShoppingFilterByCategory({
       <StyledSelectFilter
         value={selectedCategory}
         onChange={(event) => handleCategoryChange(event.target.value)}
+        aria-label="Filter by category"
+        role="combobox"
       >
         <StyledOptionFilter value="">All Categories</StyledOptionFilter>
         {categories.map((category) => (
@@ -25,7 +27,10 @@ export default function ShoppingFilterByCategory({
         ))}
       </StyledSelectFilter>
       {selectedCategory && (
-        <ShoppingFilterButton onClick={handleClearFilter}>
+        <ShoppingFilterButton
+          onClick={handleClearFilter}
+          aria-label="Remove category filter"
+        >
           Remove Filter
         </ShoppingFilterButton>
       )}

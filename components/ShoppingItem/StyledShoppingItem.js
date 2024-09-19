@@ -29,16 +29,13 @@ export const StyledItem = styled.li`
     max-width: 450px;
   }
 
-  @media (min-width: 750px) {
-    max-width: 550px;
-  }
-
   @media (min-width: 850px) {
     max-width: 350px;
   }
 
   @media (min-width: 965px) {
     max-width: 500px;
+    max-height: 680px;
   }
 `;
 
@@ -77,15 +74,15 @@ export const StyledItemLink = styled(Link)`
 export const StyledLinkArray = styled.span`
   font-size: 60px;
   position: absolute;
-  top: -1%;
+  top: -4%;
   left: 5%;
   border-radius: 5px;
   opacity: 0.8;
 `;
 
 export const StyledItemImageWrapper = styled.div`
-  width: 170px;
-  height: 150px;
+  width: 250px;
+  height: 200px;
   overflow: hidden;
   border-radius: 5px;
   position: relative;
@@ -106,18 +103,23 @@ export const StyledItemImageWrapper = styled.div`
   }
 
   @media (min-width: 500px) {
-    width: 220px;
+    width: 250px;
     height: 200px;
   }
 
   @media (min-width: 500px) {
     width: 250px;
-    height: 200px;
+    height: 250px;
   }
 
-  @media (min-width: 850px) {
+  @media (min-width: 700px) {
     width: 300px;
     height: 300px;
+  }
+
+  @media (min-width: 1000px) {
+    width: 330px;
+    height: 310px;
   }
 `;
 
@@ -129,6 +131,11 @@ export const StyledItemImage = styled(Image)`
 
 export const StyledItemTitle = styled.h3`
   font-size: 32px;
+`;
+
+export const StyledItemQuantityText = styled.span`
+  font-size: 22px;
+  font-weight: 600;
 `;
 
 export const StyledItemCategoryText = styled.span`
@@ -157,10 +164,10 @@ export const StyledItemButtonDelete = styled.button`
 
   @media (hover: hover) {
     &:hover {
-    background-color: ${(props) =>
-      props.$isPurchasedView ? "#3d3d3d" : "#555555"};
-  }
+      background-color: ${(props) =>
+        props.$isPurchasedView ? "#3d3d3d" : "#555555"};
     }
+  }
 
   &:focus {
     outline: none;
@@ -168,9 +175,6 @@ export const StyledItemButtonDelete = styled.button`
       ${(props) => (props.$isPurchasedView ? "transparent" : "red")};
     border-radius: 5px;
   }
-
-  @media (min-width: 850px) {
-    padding: ${(props) => props.$category || "15px 15px"};
 `;
 
 export const StyledStatusWrapper = styled.div`

@@ -6,6 +6,7 @@ import {
   StyledItemImageWrapper,
   StyledItemImage,
   StyledItemTitle,
+  StyledItemQuantityText,
   StyledItemCategoryText,
   StyledItemButtonDelete,
   StyledStatusWrapper,
@@ -27,7 +28,6 @@ export default function ShoppingItem({
   togglePurchasedStatus,
   isPurchasedView,
   categoryStyle,
-  deleteButton,
 }) {
   const colorCategory = categoryColor(item.category);
 
@@ -48,6 +48,8 @@ export default function ShoppingItem({
         href={`/items/${item.id}`}
         onClick={handleClick}
         $isPurchasedView={isPurchasedView}
+        role="link"
+        aria-label={`View details for ${item.name}`}
       >
         <StyledLinkArray>&rarr;</StyledLinkArray>
         <StyledItemImageWrapper>
@@ -56,13 +58,18 @@ export default function ShoppingItem({
             alt={item.name}
             fill
             sizes="150px"
+            role="img"
+            aria-label={item.name}
           />
         </StyledItemImageWrapper>
         <StyledItemTitle>{item.name}</StyledItemTitle>
-        <h4>Quantity: {item.quantity}</h4>
+        <StyledItemQuantityText>
+          Quantity: {item.quantity}
+        </StyledItemQuantityText>
         <StyledItemCategoryText
           $backgroundColor={colorCategory}
           $category={categoryStyle}
+          aria-label={`Category: ${item.category}`}
         >
           Category:
           <br /> {item.category}
@@ -78,7 +85,8 @@ export default function ShoppingItem({
             }
           }}
           $isPurchasedView={isPurchasedView}
-          $delete={deleteButton}
+          role="button"
+          aria-label={`Delete ${item.name}`}
         >
           Delete
         </StyledItemButtonDelete>
@@ -93,9 +101,8 @@ export default function ShoppingItem({
               closeModal();
               onClose();
             }}
-          >
-            <p>Are you sure you want to delete this item?</p>
-          </ModalDelete>
+            role="dialog"
+          />
         )}
         <StyledStatusWrapper>
           <StyledStatusText>
@@ -105,6 +112,10 @@ export default function ShoppingItem({
           <StyledTogglePurchasedStatus
             onClick={handleTogglePurchaseStatus}
             $isPurchasedView={isPurchasedView}
+            role="button"
+            aria-label={
+              isPurchasedView ? "Unmark as Purchased" : "Mark as Purchased"
+            }
           />
         </StyledStatusWrapper>
       </StyledItemLink>

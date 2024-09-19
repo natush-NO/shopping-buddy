@@ -1,21 +1,26 @@
-import { StyledHeader, StyledTitleHeader, ToggleButton } from "./StyledHeader";
+import {
+  StyledHeader,
+  StyledTitleHeader,
+  StyledToggleButton,
+} from "./StyledHeader";
 
 export default function Header({
   showForm,
   setShowForm,
-  titleSize,
   isListEmpty,
   listPurchases,
 }) {
   return (
     <StyledHeader>
-      <StyledTitleHeader $fontSize={titleSize}>
-        Shopping Buddy
-      </StyledTitleHeader>
+      <StyledTitleHeader>Shopping Buddy</StyledTitleHeader>
       {!showForm && !isListEmpty && !listPurchases && (
-        <ToggleButton onClick={() => setShowForm(!showForm)}>
+        <StyledToggleButton
+          onClick={() => setShowForm(!showForm)}
+          aria-label="Add item to list"
+          role="button"
+        >
           Add Item
-        </ToggleButton>
+        </StyledToggleButton>
       )}
     </StyledHeader>
   );

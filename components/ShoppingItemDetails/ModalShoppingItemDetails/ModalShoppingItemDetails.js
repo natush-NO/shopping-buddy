@@ -3,31 +3,29 @@ import {
   StyledModalContent,
   StyledCloseButton,
   StyledModalImage,
-  StyledPlaceholder,
 } from "./StyledModalShoppingItemDetails";
 
-const ModalImageDetails = ({ imageUrl, altName, onClose, placeholder }) => {
+export default function ModalImageDetails({
+  imageUrl,
+  altName,
+  onClose,
+  placeholder,
+}) {
   return (
-    <StyledOverlay onClick={onClose}>
-      <StyledModalContent onClick={(event) => event.stopPropagation()}>
+    <StyledOverlay>
+      <StyledModalContent
+        onClick={(event) => event.stopPropagation()}
+        role="dialog"
+      >
         <StyledCloseButton onClick={onClose}>&times;</StyledCloseButton>
         <StyledModalImage
           src={imageUrl ? imageUrl : placeholder}
           alt={altName ? altName : "Image"}
           width={1200}
           height={800}
+          priority
         />
-        {!imageUrl && (
-          <StyledPlaceholder
-            src={placeholder}
-            alt="Placeholder"
-            width={1200}
-            height={800}
-          />
-        )}
       </StyledModalContent>
     </StyledOverlay>
   );
-};
-
-export default ModalImageDetails;
+}

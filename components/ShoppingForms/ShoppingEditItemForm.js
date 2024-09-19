@@ -76,6 +76,7 @@ export default function ShoppingEditItemForm({
               id="name"
               name="name"
               defaultValue={initialItem.name}
+              aria-required="true"
             />
             {errors.name && (
               <StyledErrorMessage>{errors.name}</StyledErrorMessage>
@@ -92,6 +93,7 @@ export default function ShoppingEditItemForm({
               name="quantity"
               defaultValue={initialItem.quantity}
               min="0"
+              aria-required="true"
             />
             {errors.quantity && (
               <StyledErrorMessage $labelQuantity>
@@ -105,6 +107,7 @@ export default function ShoppingEditItemForm({
               id="category"
               name="category"
               defaultValue={initialItem.category}
+              aria-required="true"
             >
               <option value="">Please select a category</option>
               {categories.map((cat) => (
@@ -123,11 +126,22 @@ export default function ShoppingEditItemForm({
               id="comment"
               name="comment"
               defaultValue={initialItem.comment}
+              aria-label="Add a comment about the shopping item"
             />
           </StyledInputField>
           <div>
-            <StyledButton type="submit">Edit Item</StyledButton>
-            <StyledButton $cancel type="button" onClick={handleCancel}>
+            <StyledButton
+              type="submit"
+              aria-label="Submit the form to edit the shopping item"
+            >
+              Edit Item
+            </StyledButton>
+            <StyledButton
+              $cancel
+              type="button"
+              onClick={handleCancel}
+              aria-label="Cancel editing and close the form"
+            >
               Cancel
             </StyledButton>
           </div>

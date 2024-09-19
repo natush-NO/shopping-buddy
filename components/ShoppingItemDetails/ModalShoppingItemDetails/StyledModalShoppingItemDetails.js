@@ -37,9 +37,3 @@ export const StyledModalImage = styled(Image)`
   width: 100%;
   height: 100%;
 `;
-
-export const StyledPlaceholder = styled(Image)`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-`;

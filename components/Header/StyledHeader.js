@@ -26,26 +26,25 @@ export const StyledHeader = styled.header`
 
 export const StyledTitleHeader = styled.h1`
   font-weight: 800;
-  font-size: ${({ $fontSize }) => $fontSize || "22px"};
+  font-size: 22px;
   text-align: center;
   letter-spacing: 10px;
 
   @media (min-width: 375px) {
-    font-size: ${({ $fontSize }) => $fontSize || "30px"};
+    font-size: 34px;
   }
 
   @media (min-width: 420px) {
-    font-size: ${({ $fontSize }) => $fontSize || "38px"};
+    font-size: 38px;
   }
 
   @media (min-width: 750px) {
-    font-size: ${({ $fontSize }) => $fontSize || "52px"};
-    text-shadow: ${({ $fontSize }) =>
-      $fontSize || "2px 2px 1px rgba(20, 18, 18, 0.9)"};
+    font-size: 52px;
+    text-shadow: 2px 2px 1px rgba(20, 18, 18, 0.9);
   }
 `;
 
-export const ToggleButton = styled.button`
+export const StyledToggleButton = styled.button`
   font-size: 18px;
   margin: 0 auto;
   margin-top: 15px;

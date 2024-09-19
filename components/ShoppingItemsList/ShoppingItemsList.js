@@ -3,6 +3,7 @@ import useLocalStorageState from "use-local-storage-state";
 import {
   StyledContainerItemList,
   StyledContainerList,
+  StyledBackwardsButton,
   StyledTitleItems,
   StyledItems,
   StyledEmptyMessage,
@@ -23,7 +24,6 @@ export default function ShoppingItemsList({
   handleCancel,
   togglePurchasedStatus,
   isPurchasedView = false,
-  fontSizeTitle,
 }) {
   const [selectedCategory, setSelectedCategory] = useLocalStorageState(
     "selectedCategory",
@@ -45,14 +45,70 @@ export default function ShoppingItemsList({
 
   const noItemsFound = !isPurchasedView && filteredItems.length === 0;
 
+  function smoothScroll(targetId, duration) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + start - 250;
+    const distance = end - start;
+    let startTime = null;
+
+    function scroll(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      const easeInOut =
+        progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress;
+
+      window.scrollTo(0, start + distance * easeInOut);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(scroll);
+      } else {
+        window.scrollTo(0, end);
+      }
+    }
+
+    requestAnimationFrame(scroll);
+  }
+
+  function handleBackwardsButtonClick() {
+    if (isPurchasedView) {
+      smoothScroll("shopping-items", 2000);
+    } else {
+      smoothScroll("purchased-items", 2000);
+    }
+  }
+
   return (
     <StyledContainerItemList $isPurchasedView={isPurchasedView}>
       <StyledContainerList $isPurchasedView={isPurchasedView}>
-        <StyledTitleItems $fontSize={fontSizeTitle}>
+        <StyledTitleItems
+          id={isPurchasedView ? "purchased-items" : "shopping-items"}
+        >
           {isPurchasedView
             ? `Purchased goods (${list.length})`
             : `Shopping List (${filteredItems.length})`}
         </StyledTitleItems>
+        {!isListEmpty ? (
+          <StyledBackwardsButton
+            $isListEmpty={isListEmpty}
+            $listPurchases={listPurchases}
+            onClick={handleBackwardsButtonClick}
+            role="button"
+            aria-label={
+              isPurchasedView
+                ? "Back to shopping items"
+                : "Go to purchased items"
+            }
+          >
+            {isPurchasedView ? "Back to Top" : "Go to Purchased Items"}
+          </StyledBackwardsButton>
+        ) : null}
         {!isPurchasedView && !listPurchases && !isListEmpty && (
           <ShoppingFilterByCategory
             selectedCategory={selectedCategory}
@@ -72,7 +128,10 @@ export default function ShoppingItemsList({
                 : "No items found with the selected filter."}
             </StyledEmptyMessageText>
             {isListEmpty || !noItemsFound || listPurchases ? (
-              <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
+              <StyledEmptyMessageButton
+                onClick={() => setShowForm(true)}
+                aria-label="Add new items to the shopping list"
+              >
                 Add new items
               </StyledEmptyMessageButton>
             ) : null}
