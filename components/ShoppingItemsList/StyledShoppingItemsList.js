@@ -33,11 +33,11 @@ export const StyledTitleItems = styled.h2`
   font-weight: 800;
   color: #4a4a4a;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 
   @media (min-width: 500px) {
     font-size: 38px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
   }
 `;
 

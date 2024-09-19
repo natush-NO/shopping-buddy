@@ -8,32 +8,37 @@ import {
   StyledParagraph,
   StyledLabel,
   StyledValue,
+  StyledEditButton,
   StyledBackLink,
 } from "@/components/ShoppingItemDetails/StyledShoppingItemDetails";
 import Header from "@/components/Header/Header";
 import ModalImageDetails from "@/components/ShoppingItemDetails/ModalShoppingItemDetails/ModalShoppingItemDetails";
+import ShoppingEditItemForm from "@/components/ShoppingForms/ShoppingEditItemForm";
 
-export default function ShoppingItemDetails({ sortedItem, placeholder }) {
+export default function ShoppingItemDetails({
+  sortedItem,
+  placeholder = "/images/placeholder_image.webp",
+  handleEditItem,
+  errors,
+  setErrors,
+}) {
   const router = useRouter();
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useLocalStorageState("is-modal-open", {
     defaultValue: false,
   });
-  const [modalImageSrc, setModalImageSrc] = useLocalStorageState(
-    "modal-image-src",
-    { defaultValue: "" }
-  );
-  const [modalItemName, setModalItemName] = useLocalStorageState(
-    "modal-item-name",
-    { defaultValue: "" }
-  );
 
   const item = sortedItem.find((item) => item.id === id);
 
-  function handleImageClick() {
-    setModalImageSrc(item.imageUrl);
-    setModalItemName(item.name);
-    setIsModalOpen(true);
+  const [showFormEdit, setShowFormEdit] = useLocalStorageState(
+    "showFormEdit",
+    false
+  );
+
+  function retrieveProductData() {
+    if (item) {
+      setIsModalOpen(true);
+    }
   }
 
   function closeModal() {
@@ -47,14 +52,15 @@ export default function ShoppingItemDetails({ sortedItem, placeholder }) {
       <Header showForm={true} $paddingSize="20px 0" $titleSize="50px" />
       {isModalOpen && (
         <ModalImageDetails
-          imageSrc={modalImageSrc}
-          itemName={modalItemName}
+          imageUrl={item.imageUrl}
+          altName={item.name}
           onClose={closeModal}
+          placeholder={placeholder}
         />
       )}
       <StyledContainer>
         <StyledTitle>{item.name}</StyledTitle>
-        <StyledImageContainer onClick={handleImageClick}>
+        <StyledImageContainer onClick={retrieveProductData}>
           <StyledImage
             src={item.imageUrl ? item.imageUrl : placeholder}
             alt={item.name}
@@ -75,6 +81,20 @@ export default function ShoppingItemDetails({ sortedItem, placeholder }) {
           <StyledLabel>Comments:</StyledLabel>{" "}
           <StyledValue>{item.comment}</StyledValue>
         </StyledParagraph>
+        {showFormEdit ? (
+          <ShoppingEditItemForm
+            onAddItem={handleEditItem}
+            setShowFormEdit={setShowFormEdit}
+            initialItem={item}
+            errors={errors}
+            setErrors={setErrors}
+          />
+        ) : (
+          <StyledEditButton onClick={() => setShowFormEdit(true)}>
+            Edit
+          </StyledEditButton>
+        )}
+
         <StyledBackLink href="/">Back to Shopping List</StyledBackLink>
       </StyledContainer>
     </>

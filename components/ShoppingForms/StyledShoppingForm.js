@@ -1,5 +1,18 @@
 import styled from "styled-components";
 
+export const StyledOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
 export const StyledFormContainer = styled.div`
   position: fixed;
   top: 50%;
@@ -12,6 +25,7 @@ export const StyledFormContainer = styled.div`
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  text-align: left;
 
   z-index: 1000;
   overflow: auto;
@@ -120,6 +134,12 @@ export const StyledButton = styled.button`
 export const StyledErrorMessage = styled.p`
   color: #b71c1c;
   font-size: 14px;
-  margin-left: ${(props) => (props.$labelQuantity ? "70%" : "3")};
+  font-weight: 600;
+
+  margin-left: ${(props) => (props.$labelQuantity ? "71%" : "1%")};
   margin-top: 2px;
+
+  @media (min-width: 600px) {
+    font-size: 18px;
+  }
 `;

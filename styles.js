@@ -82,21 +82,22 @@ button {
   color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 16px;
   transition: all 0.2s;
 
 }
 
+@media (hover: hover) {
   button:hover {
-  background-color: #555555;
+    background-color: #555555;
     transition: all 0.4s;
   }
+}
 
-  button:focus {
-    border: 1px solid #3d3d3d;
-    outline: none;
-  }
+button:focus {
+  border: 1px solid #3d3d3d;
+  outline: none;
+}
 
 
 

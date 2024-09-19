@@ -1,4 +1,5 @@
 import ShoppingItem from "../ShoppingItem/ShoppingItem";
+import useLocalStorageState from "use-local-storage-state";
 import {
   StyledContainerItemList,
   StyledContainerList,
@@ -8,6 +9,7 @@ import {
   StyledEmptyMessageText,
   StyledEmptyMessageButton,
 } from "./StyledShoppingItemsList";
+import ShoppingFilterByCategory from "../ShoppingFilterByCategory/ShoppingFilterByCategory";
 
 export default function ShoppingItemsList({
   list,
@@ -23,30 +25,61 @@ export default function ShoppingItemsList({
   isPurchasedView = false,
   fontSizeTitle,
 }) {
-  const itemCount = list.length;
+  const [selectedCategory, setSelectedCategory] = useLocalStorageState(
+    "selectedCategory",
+    ""
+  );
+
+  function handleCategoryChange(category) {
+    setSelectedCategory(category);
+  }
+
+  function handleClearFilter() {
+    setSelectedCategory("");
+  }
+
+  const filteredItems =
+    !isPurchasedView && selectedCategory
+      ? list.filter((item) => item.category === selectedCategory)
+      : list;
+
+  const noItemsFound = !isPurchasedView && filteredItems.length === 0;
 
   return (
     <StyledContainerItemList $isPurchasedView={isPurchasedView}>
       <StyledContainerList $isPurchasedView={isPurchasedView}>
         <StyledTitleItems $fontSize={fontSizeTitle}>
           {isPurchasedView
-            ? `Purchased goods (${itemCount})`
-            : `Shopping List (${itemCount})`}
+            ? `Purchased goods (${list.length})`
+            : `Shopping List (${filteredItems.length})`}
         </StyledTitleItems>
-        {isListEmpty || listPurchases ? (
+        {!isPurchasedView && !listPurchases && !isListEmpty && (
+          <ShoppingFilterByCategory
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            handleCategoryChange={handleCategoryChange}
+            handleClearFilter={handleClearFilter}
+          />
+        )}
+
+        {isListEmpty || listPurchases || noItemsFound ? (
           <StyledEmptyMessage>
             <StyledEmptyMessageText>
               {isListEmpty
                 ? "No items in the shopping list."
-                : "All purchases have been completed."}
+                : listPurchases
+                ? "All purchases have been completed."
+                : "No items found with the selected filter."}
             </StyledEmptyMessageText>
-            <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
-              Add new items
-            </StyledEmptyMessageButton>
+            {isListEmpty || noItemsFound ? (
+              <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
+                Add new items
+              </StyledEmptyMessageButton>
+            ) : null}
           </StyledEmptyMessage>
         ) : (
           <StyledItems>
-            {list.map((item) => (
+            {filteredItems.map((item) => (
               <ShoppingItem
                 key={item.id}
                 item={item}
