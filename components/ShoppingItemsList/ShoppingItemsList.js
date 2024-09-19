@@ -71,7 +71,7 @@ export default function ShoppingItemsList({
                 ? "All purchases have been completed."
                 : "No items found with the selected filter."}
             </StyledEmptyMessageText>
-            {isListEmpty || noItemsFound ? (
+            {isListEmpty || !noItemsFound || listPurchases ? (
               <StyledEmptyMessageButton onClick={() => setShowForm(true)}>
                 Add new items
               </StyledEmptyMessageButton>
