@@ -3,6 +3,7 @@ import {
   StyledModalContent,
   StyledCloseButton,
   StyledModalImage,
+  StyledPlaceholder,
 } from "./StyledModalShoppingItemDetails";
 
 const ModalImageDetails = ({ imageUrl, altName, onClose, placeholder }) => {
@@ -16,6 +17,14 @@ const ModalImageDetails = ({ imageUrl, altName, onClose, placeholder }) => {
           width={1200}
           height={800}
         />
+        {!imageUrl && (
+          <StyledPlaceholder
+            src={placeholder}
+            alt="Placeholder"
+            width={1200}
+            height={800}
+          />
+        )}
       </StyledModalContent>
     </StyledOverlay>
   );
