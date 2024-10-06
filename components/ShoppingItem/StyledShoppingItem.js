@@ -78,6 +78,11 @@ export const StyledLinkArray = styled.span`
   left: 5%;
   border-radius: 5px;
   opacity: 0.8;
+
+  &::before {
+    content: "→";
+    font-size: inherit;
+  }
 `;
 
 export const StyledItemImageWrapper = styled.div`
@@ -105,11 +110,6 @@ export const StyledItemImageWrapper = styled.div`
   @media (min-width: 500px) {
     width: 250px;
     height: 200px;
-  }
-
-  @media (min-width: 500px) {
-    width: 250px;
-    height: 250px;
   }
 
   @media (min-width: 700px) {

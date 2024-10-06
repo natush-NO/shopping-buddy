@@ -38,11 +38,11 @@ export const StyledTitle = styled.h2`
   border-radius: 5px;
 
   @media (min-width: 391px) {
-    font-size: 56px;
+    font-size: 48px;
   }
 
   @media (min-width: 1100px) {
-    font-size: 68px;
+    font-size: 58px;
   }
 `;
 
