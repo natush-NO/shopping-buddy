@@ -51,7 +51,7 @@ export default function ShoppingItem({
         role="link"
         aria-label={`View details for ${item.name}`}
       >
-        <StyledLinkArray />
+        <StyledLinkArray>→</StyledLinkArray>
         <StyledItemImageWrapper>
           <StyledItemImage
             src={item.imageUrl || placeholder}
