@@ -77,6 +77,11 @@ export const StyledLinkArray = styled.span`
   top: -4%;
   left: 5%;
   opacity: 0.8;
+  background-color: red;
+
+  &::before {
+    content: "→";
+  }
 `;
 
 export const StyledItemImageWrapper = styled.div`
