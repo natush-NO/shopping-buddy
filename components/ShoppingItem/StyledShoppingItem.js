@@ -71,13 +71,13 @@ export const StyledItemLink = styled(Link)`
   }
 `;
 
-export const StyledLinkArray = styled.span`
-  font-size: 60px;
-  position: absolute;
-  top: -4%;
-  left: 5%;
-  opacity: 0.8;
-`;
+// export const StyledLinkArray = styled.span`
+//   font-size: 60px;
+//   position: absolute;
+//   top: -4%;
+//   left: 5%;
+//   opacity: 0.8;
+// `;
 
 export const StyledItemImageWrapper = styled.div`
   width: 250px;
