@@ -79,6 +79,7 @@ export const StyledLinkArray = styled.span`
     content: "→";
     font-size: 60px;
     opacity: 0.8;
+    display: inline-block;
   }
 `;
 
