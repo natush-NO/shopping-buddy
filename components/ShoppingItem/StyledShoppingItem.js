@@ -72,15 +72,16 @@ export const StyledItemLink = styled(Link)`
 `;
 
 export const StyledLinkArray = styled.span`
-  font-size: 60px;
-  position: absolute;
-  top: -4%;
-  left: 5%;
-  opacity: 0.8;
-  background-color: red;
-
   &::before {
     content: "→";
+    font-size: 60px;
+    opacity: 0.8;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: -4%;
+    left: 5%;
   }
 `;
 
