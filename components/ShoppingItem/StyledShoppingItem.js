@@ -76,7 +76,6 @@ export const StyledLinkArray = styled.span`
   position: absolute;
   top: -4%;
   left: 5%;
-  border-radius: 5px;
   opacity: 0.8;
 `;
 
