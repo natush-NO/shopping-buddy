@@ -16,7 +16,7 @@ export const StyledItem = styled.li`
   border-radius: 5px;
   position: relative;
   opacity: ${(props) => (props.$isPurchasedView ? 0.6 : 1)};
-  \ @media (min-width: 375px) {
+  @media (min-width: 375px) {
     max-width: 350px;
   }
 
@@ -74,7 +74,8 @@ export const StyledLinkArray = styled.span`
   position: absolute;
   top: -4%;
   left: 5%;
-  &::before {
+
+  &:after {
     content: "→";
     font-size: 60px;
     opacity: 0.8;
