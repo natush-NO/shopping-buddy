@@ -2,7 +2,7 @@ import categoryColor from "@/utils/categoryColor";
 import {
   StyledItem,
   StyledItemLink,
-  // StyledLinkArray,
+  StyledLinkArray,
   StyledItemImageWrapper,
   StyledItemImage,
   StyledItemTitle,
@@ -51,7 +51,7 @@ export default function ShoppingItem({
         role="link"
         aria-label={`View details for ${item.name}`}
       >
-        {/* <StyledLinkArray>&rarr;</StyledLinkArray> */}
+        <StyledLinkArray>&rarr;</StyledLinkArray>
         <StyledItemImageWrapper>
           <StyledItemImage
             src={item.imageUrl || placeholder}
