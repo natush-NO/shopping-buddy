@@ -72,14 +72,18 @@ export const StyledItemLink = styled(Link)`
 
 export const StyledLinkArray = styled.span`
   position: absolute;
-  top: -4%;
+  top: -2%;
   left: 5%;
+  width: 60px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 5px;
 
-  &:after {
-    content: "→";
-    font-size: 60px;
-    opacity: 0.8;
-    display: inline-block;
+  &::after {
+    content: "";
+    background: url("/images/array_img.png") 100% no-repeat;
+    width: 100%;
+    height: 100%;
   }
 `;
 
