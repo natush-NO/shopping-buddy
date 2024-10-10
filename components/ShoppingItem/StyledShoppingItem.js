@@ -14,10 +14,9 @@ export const StyledItem = styled.li`
       : "rgba(255, 255, 255, 0.295)"};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  opacity: ${(props) => (props.$isPurchasedView ? 0.6 : 1)};
   position: relative;
-
-  @media (min-width: 375px) {
+  opacity: ${(props) => (props.$isPurchasedView ? 0.6 : 1)};
+  \ @media (min-width: 375px) {
     max-width: 350px;
   }
 
@@ -72,16 +71,13 @@ export const StyledItemLink = styled(Link)`
 `;
 
 export const StyledLinkArray = styled.span`
+  position: absolute;
+  top: -4%;
+  left: 5%;
   &::before {
     content: "→";
     font-size: 60px;
     opacity: 0.8;
-    display: inline-block;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: -4%;
-    left: 5%;
   }
 `;
 
@@ -145,7 +141,7 @@ export const StyledItemCategoryText = styled.span`
   border-radius: 5px;
 
   @media (min-width: 375px) {
-    padding: ${(props) => props.$category || "7px 7px"}; 
+    padding: ${(props) => props.$category || "7px"}; 
   }
 
     @media (min-width: 375px) {
